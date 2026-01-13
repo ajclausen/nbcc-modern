@@ -1,0 +1,206 @@
+---
+import { siteConfig } from '@/data/siteConfig';
+import { mainNavigation, getActiveNavItem } from '@/data/navigation';
+import Icon from '@/components/ui/Icon.astro';
+
+const currentPath = getActiveNavItem(Astro.url.pathname);
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="main-header">
+  <div class="header-bg">
+    <div class="container-default">
+      <nav class="flex items-center justify-between h-16 lg:h-20" aria-label="Main navigation">
+        <!-- Logo -->
+        <a href="/" class="flex items-center gap-3 group">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-600 to-primary-800 flex items-center justify-center shadow-sm group-hover:shadow-md transition-shadow">
+            <span class="text-white font-display text-xl font-bold">N</span>
+          </div>
+          <div class="hidden sm:block">
+            <span class="block text-primary-900 font-display text-lg font-semibold leading-tight">New Brunswick</span>
+            <span class="block text-stone-500 text-xs tracking-wide">Church of Christ</span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <div class="hidden lg:flex items-center gap-1">
+          {mainNavigation.map((item) => (
+            item.highlight ? (
+              <a
+                href={item.href}
+                class="ml-3 btn btn-primary !py-2.5 !px-5 !text-sm"
+              >
+                {item.label}
+              </a>
+            ) : (
+              <a
+                href={item.href}
+                class:list={[
+                  'px-4 py-2 text-sm font-medium transition-colors relative',
+                  currentPath === item.href
+                    ? 'text-primary-700'
+                    : 'text-stone-600 hover:text-primary-700',
+                ]}
+                aria-current={currentPath === item.href ? 'page' : undefined}
+              >
+                {item.label}
+                {currentPath === item.href && (
+                  <span class="absolute bottom-0 left-4 right-4 h-0.5 bg-terra-400 rounded-full"></span>
+                )}
+              </a>
+            )
+          ))}
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button
+          type="button"
+          class="lg:hidden w-10 h-10 flex items-center justify-center text-stone-700 hover:text-primary-700 hover:bg-stone-100 rounded-xl transition-colors"
+          id="mobile-menu-button"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          aria-label="Toggle menu"
+        >
+          <Icon name="menu" size="lg" class="menu-icon" />
+          <Icon name="x" size="lg" class="close-icon hidden" />
+        </button>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div
+    id="mobile-menu"
+    class="lg:hidden fixed inset-x-0 top-16 bottom-0 bg-cream-50/98 backdrop-blur-md transform translate-x-full transition-transform duration-300 ease-in-out overflow-y-auto"
+    aria-hidden="true"
+  >
+    <div class="container-default py-8">
+      <div class="flex flex-col gap-1">
+        {mainNavigation.map((item) => (
+          <a
+            href={item.href}
+            class:list={[
+              'px-4 py-3.5 text-lg font-medium rounded-xl transition-all',
+              currentPath === item.href
+                ? 'text-primary-700 bg-primary-100'
+                : 'text-stone-700 hover:text-primary-700 hover:bg-stone-100',
+              item.highlight && 'bg-terra-500 text-white hover:bg-terra-600 hover:text-white mt-4',
+            ]}
+            aria-current={currentPath === item.href ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        ))}
+      </div>
+
+      <!-- Contact Info in Mobile Menu -->
+      <div class="mt-10 pt-8 border-t border-stone-200">
+        <p class="text-sm font-medium text-stone-500 uppercase tracking-wider mb-4">Contact Us</p>
+        <div class="space-y-4">
+          <a href={`tel:${siteConfig.contact.phone}`} class="flex items-center gap-3 text-stone-600 hover:text-primary-700 transition-colors">
+            <Icon name="phone" />
+            <span>{siteConfig.contact.phoneFormatted}</span>
+          </a>
+          <a href={`mailto:${siteConfig.contact.email}`} class="flex items-center gap-3 text-stone-600 hover:text-primary-700 transition-colors">
+            <Icon name="email" />
+            <span>{siteConfig.contact.email}</span>
+          </a>
+          <a href={siteConfig.contact.mapUrl} target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-stone-600 hover:text-primary-700 transition-colors">
+            <Icon name="map" />
+            <span>Get Directions</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Service Times Quick View -->
+      <div class="mt-8 p-5 bg-primary-900 rounded-2xl text-white">
+        <p class="font-display font-semibold mb-3">Join Us Sunday</p>
+        <div class="space-y-2 text-sm">
+          <div class="flex justify-between">
+            <span class="text-primary-200">Sunday School</span>
+            <span class="font-semibold">9:00 AM</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-primary-200">Worship Service</span>
+            <span class="font-semibold">10:00 AM</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Spacer for fixed header -->
+<div class="h-16 lg:h-20"></div>
+
+<style>
+  .header-bg {
+    background: rgba(254, 253, 251, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(212, 206, 195, 0.3);
+  }
+
+  /* Scrolled state - handled by JS */
+  .header-scrolled .header-bg {
+    background: rgba(254, 253, 251, 0.98);
+    box-shadow: 0 4px 20px -4px rgba(30, 52, 72, 0.08);
+  }
+</style>
+
+<script>
+  const header = document.getElementById('main-header');
+  const menuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuIcon = menuButton?.querySelector('.menu-icon');
+  const closeIcon = menuButton?.querySelector('.close-icon');
+
+  let isOpen = false;
+
+  // Header scroll effect
+  function handleScroll() {
+    if (window.scrollY > 20) {
+      header?.classList.add('header-scrolled');
+    } else {
+      header?.classList.remove('header-scrolled');
+    }
+  }
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  handleScroll(); // Check initial state
+
+  function toggleMenu() {
+    isOpen = !isOpen;
+
+    if (isOpen) {
+      mobileMenu?.classList.remove('translate-x-full');
+      mobileMenu?.classList.add('translate-x-0');
+      menuIcon?.classList.add('hidden');
+      closeIcon?.classList.remove('hidden');
+      menuButton?.setAttribute('aria-expanded', 'true');
+      mobileMenu?.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    } else {
+      mobileMenu?.classList.add('translate-x-full');
+      mobileMenu?.classList.remove('translate-x-0');
+      menuIcon?.classList.remove('hidden');
+      closeIcon?.classList.add('hidden');
+      menuButton?.setAttribute('aria-expanded', 'false');
+      mobileMenu?.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+  }
+
+  menuButton?.addEventListener('click', toggleMenu);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isOpen) {
+      toggleMenu();
+    }
+  });
+
+  mobileMenu?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      if (isOpen) toggleMenu();
+    });
+  });
+</script>

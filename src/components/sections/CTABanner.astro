@@ -1,0 +1,53 @@
+---
+import Container from '@/components/ui/Container.astro';
+import Button from '@/components/ui/Button.astro';
+import Icon from '@/components/ui/Icon.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  primaryCta?: {
+    label: string;
+    href: string;
+  };
+  secondaryCta?: {
+    label: string;
+    href: string;
+  };
+  variant?: 'primary' | 'secondary';
+}
+
+const {
+  title = "Ready to Visit?",
+  description = "We'd love to meet you! Plan your first visit and discover what makes NBCC special.",
+  primaryCta = { label: 'Plan Your Visit', href: '/visit' },
+  secondaryCta = { label: 'Watch Online', href: '/livestream' },
+  variant = 'primary',
+} = Astro.props;
+
+const bgClass = variant === 'primary' ? 'bg-primary-900' : 'bg-secondary-500';
+---
+
+<section class={`py-16 ${bgClass} text-white`}>
+  <Container>
+    <div class="text-center max-w-3xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-heading font-semibold mb-4">
+        {title}
+      </h2>
+      <p class="text-lg text-primary-100 mb-8">
+        {description}
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <Button href={primaryCta.href} variant="white" size="lg">
+          {primaryCta.label}
+        </Button>
+        {secondaryCta && (
+          <Button href={secondaryCta.href} variant="outline" size="lg" class="border-white text-white hover:bg-white hover:text-primary-900">
+            <Icon name="play" size="sm" />
+            {secondaryCta.label}
+          </Button>
+        )}
+      </div>
+    </div>
+  </Container>
+</section>

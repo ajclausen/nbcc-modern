@@ -1,0 +1,272 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import Button from '@/components/ui/Button.astro';
+
+const coreBeliefs = [
+  {
+    title: 'The Bible',
+    scripture: '2 Timothy 3:16-17',
+    content: 'We believe the Bible is the inspired Word of God, the complete revelation of His will for salvation, and the ultimate authority for Christian faith and life.',
+    icon: 'book',
+  },
+  {
+    title: 'God',
+    scripture: 'Deuteronomy 6:4',
+    content: 'We believe in one God, eternally existing in three persons: Father, Son, and Holy Spirit. God is the Creator of all things, loving, holy, and sovereign over all.',
+    icon: 'crown',
+  },
+  {
+    title: 'Jesus Christ',
+    scripture: 'John 3:16',
+    content: 'We believe Jesus Christ is the Son of God, fully divine and fully human. He was born of a virgin, lived a sinless life, died on the cross for our sins, rose bodily from the dead, and will return again in glory.',
+    icon: 'cross',
+  },
+  {
+    title: 'The Holy Spirit',
+    scripture: 'Acts 1:8',
+    content: 'We believe in the Holy Spirit who convicts the world of sin, regenerates believers, and empowers the church for witness and service. We are a Spirit-filled community seeking to follow His leading.',
+    icon: 'flame',
+  },
+  {
+    title: 'Salvation',
+    scripture: 'Ephesians 2:8-9',
+    content: 'We believe salvation is a gift of grace through faith in Jesus Christ. We are saved not by our own works, but by trusting in Christ\'s finished work on the cross.',
+    icon: 'gift',
+  },
+  {
+    title: 'Baptism',
+    scripture: 'Romans 6:3-4',
+    content: 'We practice baptism by immersion as an expression of faith in Christ and obedience to His command. Baptism represents the believer\'s identification with Christ\'s death, burial, and resurrection.',
+    icon: 'water',
+  },
+  {
+    title: 'The Church',
+    scripture: '1 Corinthians 12:27',
+    content: 'We believe the church is the body of Christ, made up of all who have placed their faith in Him. The local church gathers for worship, teaching, fellowship, and service.',
+    icon: 'church',
+  },
+  {
+    title: 'The Lord\'s Supper',
+    scripture: '1 Corinthians 11:26',
+    content: 'We observe the Lord\'s Supper each Sunday as Jesus commanded, remembering His sacrifice and proclaiming His death until He returns.',
+    icon: 'bread',
+  },
+];
+
+const iconPaths: Record<string, string> = {
+  book: 'M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253',
+  crown: 'M5 3l3.5 4L12 3l3.5 4L19 3v15a2 2 0 01-2 2H7a2 2 0 01-2-2V3z',
+  cross: 'M12 2v20M5 9h14',
+  flame: 'M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z',
+  gift: 'M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7',
+  water: 'M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707',
+  church: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4',
+  bread: 'M21 15.9999V7.9999C21 6.8954 20.1046 5.9999 19 5.9999H5C3.89543 5.9999 3 6.8954 3 7.9999V15.9999C3 17.1045 3.89543 17.9999 5 17.9999H19C20.1046 17.9999 21 17.1045 21 15.9999Z',
+};
+---
+
+<PageLayout
+  title="What We Believe"
+  description="Explore the core beliefs and doctrinal foundations of New Brunswick Church of Christ - a non-denominational church rooted in biblical faith."
+  heroTitle="What We Believe"
+  heroSubtitle="Our faith is built on the timeless truths of Scripture"
+>
+  <!-- Heritage Introduction -->
+  <section class="relative py-24 overflow-hidden">
+    <!-- Decorative background -->
+    <div class="absolute inset-0 bg-gradient-to-br from-cream-100 via-cream-50 to-white"></div>
+    <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary-100/30 to-transparent"></div>
+
+    <Container class="relative">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <!-- Left: Content -->
+        <div>
+          <div class="inline-flex items-center gap-2 mb-6">
+            <span class="w-12 h-[2px] bg-terra-500"></span>
+            <span class="text-terra-600 text-sm font-medium tracking-widest uppercase">Our Foundation</span>
+          </div>
+
+          <h2 class="text-4xl md:text-5xl font-display font-semibold text-primary-900 mb-6 leading-tight">
+            Rooted in the<br />
+            <span class="text-terra-600 italic">Restoration Movement</span>
+          </h2>
+
+          <div class="space-y-5 text-lg text-stone-600 leading-relaxed">
+            <p>
+              New Brunswick Church of Christ is part of the Restoration Movement, a tradition
+              that seeks to return to the simple faith and practices of the New Testament church.
+            </p>
+            <p>
+              We are non-denominational, believing that <strong class="text-primary-800">Scripture alone</strong> should
+              guide our beliefs and practices. While we don't require agreement on every point of
+              theology, we share a common commitment to following Jesus and honoring the Bible as God's Word.
+            </p>
+          </div>
+        </div>
+
+        <!-- Right: Visual Element -->
+        <div class="relative">
+          <div class="aspect-square max-w-md mx-auto">
+            <!-- Decorative circles -->
+            <div class="absolute inset-0 rounded-full border-2 border-primary-200/50 animate-pulse"></div>
+            <div class="absolute inset-8 rounded-full border-2 border-terra-300/30"></div>
+            <div class="absolute inset-16 rounded-full bg-gradient-to-br from-primary-100 to-cream-200"></div>
+
+            <!-- Center content -->
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="text-center">
+                <span class="text-7xl md:text-8xl font-display font-bold text-primary-800 opacity-20">168</span>
+                <p class="text-sm text-stone-500 tracking-widest uppercase -mt-2">Years of Faith</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Core Beliefs -->
+  <section class="py-24 bg-primary-950 text-white relative overflow-hidden">
+    <!-- Texture overlay -->
+    <div class="absolute inset-0 opacity-[0.03]" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E&quot;);"></div>
+
+    <Container class="relative">
+      <div class="text-center mb-16">
+        <div class="inline-flex items-center gap-3 mb-4">
+          <span class="w-8 h-[1px] bg-golden-400"></span>
+          <span class="text-golden-400 text-sm font-medium tracking-widest uppercase">Our Doctrine</span>
+          <span class="w-8 h-[1px] bg-golden-400"></span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-display font-semibold mb-4">
+          Core Beliefs
+        </h2>
+        <p class="text-primary-200 text-lg max-w-2xl mx-auto">
+          The biblical foundations that unite us as a church family
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6 lg:gap-8">
+        {coreBeliefs.map((belief, index) => (
+          <article class="group relative bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:bg-white/10 transition-all duration-300">
+            <!-- Number badge -->
+            <div class="absolute -top-3 -left-3 w-10 h-10 bg-terra-500 rounded-xl flex items-center justify-center font-display font-bold text-lg shadow-lg">
+              {index + 1}
+            </div>
+
+            <!-- Icon -->
+            <div class="w-12 h-12 rounded-xl bg-primary-800/50 flex items-center justify-center mb-5 group-hover:bg-terra-500/30 transition-colors">
+              <svg class="w-6 h-6 text-golden-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d={iconPaths[belief.icon]} />
+              </svg>
+            </div>
+
+            <!-- Content -->
+            <h3 class="text-2xl font-display font-semibold text-white mb-2">
+              {belief.title}
+            </h3>
+            <p class="text-terra-400 text-sm font-medium mb-4 font-accent text-lg">
+              {belief.scripture}
+            </p>
+            <p class="text-primary-200 leading-relaxed">
+              {belief.content}
+            </p>
+          </article>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- Unity Quote -->
+  <section class="py-24 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-cream-100 to-white"></div>
+
+    <!-- Decorative elements -->
+    <div class="absolute top-0 left-0 w-96 h-96 bg-terra-500/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+    <div class="absolute bottom-0 right-0 w-64 h-64 bg-primary-500/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
+
+    <Container class="relative">
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="inline-flex items-center gap-2 mb-8">
+          <span class="w-8 h-[2px] bg-terra-400"></span>
+          <span class="text-terra-600 text-sm font-medium tracking-widest uppercase">Our Principle</span>
+          <span class="w-8 h-[2px] bg-terra-400"></span>
+        </div>
+
+        <h2 class="text-4xl md:text-5xl font-display font-semibold text-primary-900 mb-8 leading-tight">
+          Unity in Essentials
+        </h2>
+
+        <blockquote class="relative mb-12">
+          <div class="absolute -top-4 -left-4 text-8xl font-display text-terra-200 leading-none">"</div>
+          <p class="text-2xl md:text-3xl font-display text-primary-800 italic leading-relaxed relative z-10 px-8">
+            In essentials, unity; in non-essentials, liberty; in all things, love.
+          </p>
+          <div class="absolute -bottom-8 -right-4 text-8xl font-display text-terra-200 leading-none rotate-180">"</div>
+        </blockquote>
+
+        <p class="text-lg text-stone-600 max-w-2xl mx-auto mb-10">
+          We hold firmly to the core truths of Scripture while extending grace on matters
+          where faithful Christians may disagree. What matters most is our shared commitment
+          to Jesus Christ as Lord and Savior.
+        </p>
+
+        <div class="flex flex-wrap gap-4 justify-center">
+          <Button href="/contact" variant="primary">
+            Have Questions?
+          </Button>
+          <Button href="/visit" variant="outline">
+            Visit Us Sunday
+          </Button>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Scripture Foundation -->
+  <section class="relative py-20 overflow-hidden">
+    <div class="absolute inset-0">
+      <img
+        src="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=1920&q=80"
+        alt=""
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-primary-950/90"></div>
+    </div>
+
+    <Container class="relative z-10">
+      <blockquote class="max-w-3xl mx-auto text-center">
+        <p class="text-3xl md:text-4xl font-display text-cream-100 mb-8 italic leading-relaxed">
+          "For no one can lay any foundation other than the one already laid, which is Jesus Christ."
+        </p>
+        <cite class="text-terra-400 not-italic font-medium text-lg">— 1 Corinthians 3:11</cite>
+      </blockquote>
+    </Container>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-24 bg-stone-100">
+    <Container>
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-4xl md:text-5xl font-display font-semibold text-primary-900 mb-6">
+          Experience Faith in Community
+        </h2>
+        <p class="text-xl text-stone-600 mb-10 max-w-2xl mx-auto">
+          Beliefs are lived out in community. Join us this Sunday to see our faith in action
+          and discover what it means to be part of the NBCC family.
+        </p>
+        <div class="flex flex-wrap gap-4 justify-center">
+          <a href="/visit" class="btn btn-warm">
+            Plan Your Visit
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+          <a href="/livestream" class="btn btn-secondary">
+            Watch Online
+          </a>
+        </div>
+      </div>
+    </Container>
+  </section>
+</PageLayout>

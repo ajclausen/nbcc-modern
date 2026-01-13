@@ -1,0 +1,308 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import VideoHero from '@/components/hero/VideoHero.astro';
+import Container from '@/components/ui/Container.astro';
+import { getCollection } from 'astro:content';
+import { siteConfig } from '@/data/siteConfig';
+
+// Get upcoming events
+const allEvents = await getCollection('events', ({ data }) => {
+  return data.published !== false;
+});
+
+const sortedEvents = allEvents
+  .filter((event) => new Date(event.data.date) >= new Date())
+  .sort((a, b) => new Date(a.data.date).getTime() - new Date(b.data.date).getTime())
+  .slice(0, 3);
+---
+
+<BaseLayout>
+  <!-- Hero - Golden hour outdoor scene -->
+  <VideoHero
+    posterSrc="https://images.unsplash.com/photo-1507692812060-98338d07aca3?w=1920&q=80"
+  />
+
+  <!-- Welcome Section -->
+  <section id="welcome" class="section-padding">
+    <Container>
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <!-- Image with editorial treatment -->
+        <div class="relative order-2 lg:order-1">
+          <div class="relative">
+            <!-- Main Image -->
+            <div class="aspect-[4/5] rounded-2xl overflow-hidden shadow-elevated">
+              <img
+                src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=800&q=80"
+                alt="Community gathered outdoors"
+                class="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+
+            <!-- Floating accent card -->
+            <div class="absolute -bottom-6 -right-6 bg-white rounded-xl p-5 shadow-card max-w-[200px] hidden md:block">
+              <p class="text-terra-500 font-accent text-2xl leading-tight">"A place that feels like home"</p>
+            </div>
+
+            <!-- Decorative element -->
+            <div class="absolute -top-4 -left-4 w-24 h-24 bg-primary-100 rounded-2xl -z-10"></div>
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div class="order-1 lg:order-2">
+          <div class="inline-flex items-center gap-2 mb-4">
+            <span class="w-8 h-[2px] bg-terra-400"></span>
+            <span class="text-terra-600 text-sm font-medium tracking-wide uppercase">Since 1856</span>
+          </div>
+
+          <h2 class="text-primary-900 mb-6">
+            Welcome Home
+          </h2>
+
+          <div class="space-y-5 text-stone-600 text-lg leading-relaxed">
+            <p>
+              For over <strong class="text-primary-800 font-semibold">165 years</strong>, New Brunswick Church of Christ
+              has been a beacon of faith in Lebanon, Indiana. We're a Spirit-filled,
+              non-denominational church family committed to uplifting Christ and sharing
+              His love with everyone we meet.
+            </p>
+            <p>
+              Whether you've been walking with Jesus for decades or you're just curious
+              about faith, you'll find a warm welcome here. We believe church should
+              feel like coming home.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap gap-4 mt-8">
+            <a href="/about" class="btn btn-primary">
+              Our Story
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+            <a href="/visit" class="btn btn-secondary">
+              What to Expect
+            </a>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Service Times - Mobile Version (shows on mobile only since hero has desktop version) -->
+  <section id="service-times" class="section-padding bg-primary-900 text-white lg:hidden">
+    <Container>
+      <div class="text-center mb-10">
+        <h2 class="text-white mb-3">Join Us This Week</h2>
+        <p class="text-primary-200">Everyone is welcome. Come as you are.</p>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <div class="bg-white/10 rounded-xl p-5 text-center backdrop-blur-sm">
+          <p class="text-primary-200 text-sm mb-1">Sunday School</p>
+          <p class="text-2xl font-display font-semibold">9:00 AM</p>
+        </div>
+        <div class="bg-white/10 rounded-xl p-5 text-center backdrop-blur-sm">
+          <p class="text-primary-200 text-sm mb-1">Worship</p>
+          <p class="text-2xl font-display font-semibold">10:00 AM</p>
+        </div>
+        <div class="bg-white/10 rounded-xl p-5 text-center backdrop-blur-sm">
+          <p class="text-primary-200 text-sm mb-1">Kids Church</p>
+          <p class="text-2xl font-display font-semibold">10:20 AM</p>
+        </div>
+        <div class="bg-white/10 rounded-xl p-5 text-center backdrop-blur-sm">
+          <p class="text-primary-200 text-sm mb-1">Wednesday</p>
+          <p class="text-2xl font-display font-semibold">7:00 PM</p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Events Section -->
+  {sortedEvents.length > 0 && (
+    <section class="section-padding bg-stone-100">
+      <Container>
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12">
+          <div>
+            <div class="inline-flex items-center gap-2 mb-3">
+              <span class="w-8 h-[2px] bg-terra-400"></span>
+              <span class="text-terra-600 text-sm font-medium tracking-wide uppercase">What's Happening</span>
+            </div>
+            <h2 class="text-primary-900">Upcoming Events</h2>
+          </div>
+          <a href="/events" class="text-primary-700 font-medium inline-flex items-center gap-2 hover:text-primary-800 transition-colors">
+            View all events
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {sortedEvents.map((event, index) => (
+            <article class="card group overflow-hidden">
+              <div class="p-6">
+                <div class="flex items-center gap-3 mb-4">
+                  <div class="w-14 h-14 rounded-xl bg-primary-100 flex flex-col items-center justify-center">
+                    <span class="text-xs font-semibold text-primary-600 uppercase">
+                      {new Date(event.data.date).toLocaleDateString('en-US', { month: 'short' })}
+                    </span>
+                    <span class="text-xl font-display font-bold text-primary-800">
+                      {new Date(event.data.date).getDate()}
+                    </span>
+                  </div>
+                  <div>
+                    <span class="badge badge-primary text-xs">{event.data.category}</span>
+                  </div>
+                </div>
+
+                <h3 class="font-display text-xl font-semibold text-primary-900 mb-2 group-hover:text-primary-700 transition-colors">
+                  <a href={`/events/${event.id}`}>
+                    {event.data.title}
+                  </a>
+                </h3>
+
+                <p class="text-stone-600 text-sm mb-4 line-clamp-2">
+                  {event.data.description}
+                </p>
+
+                <div class="flex items-center gap-4 text-sm text-stone-500">
+                  {event.data.time && (
+                    <span class="flex items-center gap-1.5">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      {event.data.time}
+                    </span>
+                  )}
+                  {event.data.location && (
+                    <span class="flex items-center gap-1.5">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      </svg>
+                      {event.data.location}
+                    </span>
+                  )}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </Container>
+    </section>
+  )}
+
+  <!-- Location & CTA Section -->
+  <section class="section-padding">
+    <Container>
+      <div class="grid lg:grid-cols-5 gap-12 lg:gap-16 items-center">
+        <!-- Map/Location Image -->
+        <div class="lg:col-span-2">
+          <div class="aspect-square rounded-2xl overflow-hidden shadow-card">
+            <img
+              src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80"
+              alt="Rural Indiana landscape"
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div class="lg:col-span-3">
+          <div class="inline-flex items-center gap-2 mb-4">
+            <span class="w-8 h-[2px] bg-terra-400"></span>
+            <span class="text-terra-600 text-sm font-medium tracking-wide uppercase">Find Us</span>
+          </div>
+
+          <h2 class="text-primary-900 mb-6">
+            Located in Beautiful<br class="hidden sm:block" /> Lebanon, Indiana
+          </h2>
+
+          <p class="text-stone-600 text-lg mb-8 max-w-xl">
+            Just a short drive from Indianapolis, our doors have been open to the
+            community since 1856. We're easy to find on State Road 39, with plenty
+            of parking available.
+          </p>
+
+          <!-- Contact Info Cards -->
+          <div class="grid sm:grid-cols-2 gap-4 mb-8">
+            <a
+              href={siteConfig.contact.mapUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-start gap-4 p-4 bg-stone-100 rounded-xl hover:bg-stone-200 transition-colors group"
+            >
+              <div class="w-10 h-10 rounded-lg bg-primary-100 flex items-center justify-center shrink-0 group-hover:bg-primary-200 transition-colors">
+                <svg class="w-5 h-5 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                </svg>
+              </div>
+              <div>
+                <p class="font-semibold text-primary-900">{siteConfig.contact.address}</p>
+                <p class="text-stone-500 text-sm">{siteConfig.contact.city}, {siteConfig.contact.state} {siteConfig.contact.zip}</p>
+              </div>
+            </a>
+
+            <a
+              href={`tel:${siteConfig.contact.phone}`}
+              class="flex items-start gap-4 p-4 bg-stone-100 rounded-xl hover:bg-stone-200 transition-colors group"
+            >
+              <div class="w-10 h-10 rounded-lg bg-primary-100 flex items-center justify-center shrink-0 group-hover:bg-primary-200 transition-colors">
+                <svg class="w-5 h-5 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+              </div>
+              <div>
+                <p class="font-semibold text-primary-900">Call Us</p>
+                <p class="text-stone-500 text-sm">{siteConfig.contact.phoneFormatted}</p>
+              </div>
+            </a>
+          </div>
+
+          <a href={siteConfig.contact.mapUrl} target="_blank" rel="noopener noreferrer" class="btn btn-warm">
+            Get Directions
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="relative py-24 overflow-hidden">
+    <!-- Background Image -->
+    <div class="absolute inset-0">
+      <img
+        src="https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?w=1920&q=80"
+        alt=""
+        class="w-full h-full object-cover"
+        loading="lazy"
+      />
+      <div class="absolute inset-0 bg-primary-950/85"></div>
+    </div>
+
+    <Container class="relative z-10">
+      <div class="text-center max-w-2xl mx-auto">
+        <h2 class="text-white mb-4">
+          Ready to Visit?
+        </h2>
+        <p class="text-primary-200 text-lg mb-8">
+          We'd love to meet you this Sunday. Whether you're exploring faith or
+          looking for a church home, there's a place for you here.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/visit" class="btn btn-warm">
+            Plan Your Visit
+          </a>
+          <a href="/livestream" class="btn !bg-white/10 !text-white border border-white/30 hover:!bg-white/20">
+            Watch Online First
+          </a>
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

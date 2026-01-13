@@ -1,0 +1,149 @@
+---
+import { siteConfig } from '@/data/siteConfig';
+import { footerNavigation } from '@/data/navigation';
+import { serviceTimes } from '@/data/serviceTimes';
+import Icon from '@/components/ui/Icon.astro';
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-primary-950 text-white relative overflow-hidden">
+  <!-- Decorative Elements -->
+  <div class="absolute top-0 right-0 w-96 h-96 bg-terra-500/5 rounded-full blur-3xl"></div>
+  <div class="absolute bottom-0 left-0 w-64 h-64 bg-primary-700/10 rounded-full blur-3xl"></div>
+
+  <!-- Main Footer -->
+  <div class="relative py-16 lg:py-20">
+    <div class="container-default">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8">
+        <!-- Brand Column -->
+        <div class="lg:col-span-4">
+          <a href="/" class="inline-flex items-center gap-3 mb-6 group">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow">
+              <span class="text-white font-display text-2xl font-bold">N</span>
+            </div>
+            <div>
+              <span class="block text-white font-display text-xl font-semibold">{siteConfig.name}</span>
+            </div>
+          </a>
+
+          <p class="text-primary-200 mb-6 leading-relaxed max-w-sm">
+            {siteConfig.tagline}
+          </p>
+
+          <p class="text-primary-300 text-sm mb-6">
+            Serving Lebanon, Indiana since {siteConfig.founded}
+          </p>
+
+          <!-- Social Links -->
+          {siteConfig.social.facebook && (
+            <a
+              href={siteConfig.social.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 rounded-lg text-primary-200 hover:text-white transition-all"
+              aria-label="Follow us on Facebook"
+            >
+              <Icon name="facebook" size="sm" />
+              <span class="text-sm font-medium">Follow on Facebook</span>
+            </a>
+          )}
+        </div>
+
+        <!-- Service Times -->
+        <div class="lg:col-span-3">
+          <h3 class="font-display text-lg font-semibold text-white mb-6 flex items-center gap-2">
+            <span class="w-2 h-2 bg-terra-400 rounded-full"></span>
+            Service Times
+          </h3>
+          <ul class="space-y-4">
+            {serviceTimes.filter(s => s.id === 'sunday-school' || s.id === 'main-service').map((service) => (
+              <li class="text-primary-100">
+                <span class="font-semibold text-white block">{service.name}</span>
+                <span class="text-sm">{service.day} at {service.time}</span>
+                {service.note && (
+                  <span class="text-terra-400 text-sm block">{service.note}</span>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- Connect Links -->
+        <div class="lg:col-span-2">
+          <h3 class="font-display text-lg font-semibold text-white mb-6 flex items-center gap-2">
+            <span class="w-2 h-2 bg-terra-400 rounded-full"></span>
+            Connect
+          </h3>
+          <ul class="space-y-3">
+            {footerNavigation.connect.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  class="text-primary-100 hover:text-white transition-colors inline-flex items-center gap-2"
+                >
+                  <span class="w-1 h-1 bg-terra-400 rounded-full"></span>
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="lg:col-span-3">
+          <h3 class="font-display text-lg font-semibold text-white mb-6 flex items-center gap-2">
+            <span class="w-2 h-2 bg-terra-400 rounded-full"></span>
+            Contact
+          </h3>
+          <address class="not-italic space-y-4">
+            <a
+              href={siteConfig.contact.mapUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-start gap-3 text-primary-100 hover:text-white transition-colors group"
+            >
+              <Icon name="map" class="mt-0.5 shrink-0 text-terra-400 group-hover:text-terra-300 transition-colors" />
+              <span>
+                {siteConfig.contact.address}<br />
+                {siteConfig.contact.city}, {siteConfig.contact.state} {siteConfig.contact.zip}
+              </span>
+            </a>
+
+            <a
+              href={`tel:${siteConfig.contact.phone}`}
+              class="flex items-center gap-3 text-primary-100 hover:text-white transition-colors group"
+            >
+              <Icon name="phone" class="shrink-0 text-terra-400 group-hover:text-terra-300 transition-colors" />
+              <span>{siteConfig.contact.phoneFormatted}</span>
+            </a>
+
+            <a
+              href={`mailto:${siteConfig.contact.email}`}
+              class="flex items-center gap-3 text-primary-100 hover:text-white transition-colors group"
+            >
+              <Icon name="email" class="shrink-0 text-terra-400 group-hover:text-terra-300 transition-colors" />
+              <span>{siteConfig.contact.email}</span>
+            </a>
+          </address>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="relative border-t border-primary-800/50">
+    <div class="container-default py-6">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-primary-200">
+        <p>
+          &copy; {currentYear} {siteConfig.name}. All rights reserved.
+        </p>
+        <div class="flex items-center gap-6">
+          <a href="/contact" class="hover:text-white transition-colors">Contact</a>
+          <a href="/beliefs" class="hover:text-white transition-colors">Beliefs</a>
+          <a href="/visit" class="hover:text-white transition-colors">Visit</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

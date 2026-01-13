@@ -1,0 +1,60 @@
+---
+import { siteConfig } from '@/data/siteConfig';
+import Button from '@/components/ui/Button.astro';
+import Icon from '@/components/ui/Icon.astro';
+---
+
+<div class="bg-primary-900 text-white rounded-2xl overflow-hidden shadow-elevated">
+  <!-- Map -->
+  <div class="aspect-video relative bg-primary-800">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3054.8!2d-86.47!3d40.04!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8814cd7f3e8b8b8b%3A0x0!2s6480+S+State+Road+39%2C+Lebanon%2C+IN+46052!5e0!3m2!1sen!2sus!4v1"
+      class="w-full h-full border-0"
+      allowfullscreen
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="NBCC Location Map"
+    ></iframe>
+  </div>
+
+  <!-- Info -->
+  <div class="p-6 md:p-8">
+    <h3 class="font-heading text-2xl font-semibold mb-6">Find Us</h3>
+
+    <address class="not-italic space-y-4 mb-8">
+      <a
+        href={siteConfig.contact.mapUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-start gap-3 text-primary-100 hover:text-white transition-colors group"
+      >
+        <Icon name="map" class="mt-0.5 shrink-0 text-secondary-400" />
+        <span>
+          {siteConfig.contact.address}<br />
+          {siteConfig.contact.city}, {siteConfig.contact.state} {siteConfig.contact.zip}
+        </span>
+      </a>
+
+      <a
+        href={`tel:${siteConfig.contact.phone}`}
+        class="flex items-center gap-3 text-primary-100 hover:text-white transition-colors"
+      >
+        <Icon name="phone" class="shrink-0 text-secondary-400" />
+        <span>{siteConfig.contact.phoneFormatted}</span>
+      </a>
+
+      <a
+        href={`mailto:${siteConfig.contact.email}`}
+        class="flex items-center gap-3 text-primary-100 hover:text-white transition-colors"
+      >
+        <Icon name="email" class="shrink-0 text-secondary-400" />
+        <span>{siteConfig.contact.email}</span>
+      </a>
+    </address>
+
+    <Button href={siteConfig.contact.mapUrl} variant="primary" class="w-full" external>
+      <Icon name="map" size="sm" />
+      Get Directions
+    </Button>
+  </div>
+</div>

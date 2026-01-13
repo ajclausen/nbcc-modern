@@ -1,0 +1,153 @@
+---
+import { siteConfig } from '@/data/siteConfig';
+
+interface Props {
+  videoSrc?: string;
+  posterSrc: string;
+}
+
+const {
+  videoSrc,
+  posterSrc,
+} = Astro.props;
+---
+
+<section class="relative min-h-[90vh] lg:min-h-screen flex items-end lg:items-center overflow-hidden bg-primary-950">
+  <!-- Background Image with artistic treatment -->
+  <div class="absolute inset-0">
+    <img
+      src={posterSrc}
+      alt=""
+      class="w-full h-full object-cover opacity-60"
+      aria-hidden="true"
+      fetchpriority="high"
+      decoding="async"
+    />
+
+    <!-- Gradient overlays for depth -->
+    <div class="absolute inset-0 bg-gradient-to-r from-primary-950/90 via-primary-950/40 to-transparent"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-primary-950 via-primary-950/30 to-transparent"></div>
+
+    <!-- Subtle texture overlay -->
+    <div class="absolute inset-0 opacity-[0.03]" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E&quot;);"></div>
+  </div>
+
+  <!-- Main Content - Asymmetric Editorial Layout -->
+  <div class="container-default relative z-10 pb-16 lg:pb-0">
+    <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-end lg:items-center">
+
+      <!-- Left Column - Main Content -->
+      <div class="lg:col-span-7 xl:col-span-6">
+        <!-- Heritage Badge -->
+        <div class="inline-flex items-center gap-2 mb-6 opacity-0 animate-[fade-in_0.6s_ease-out_0.2s_forwards]">
+          <span class="w-8 h-[1px] bg-golden-400"></span>
+          <span class="text-golden-400 text-sm font-medium tracking-[0.2em] uppercase">Est. 1856</span>
+        </div>
+
+        <!-- Church Name - Editorial Typography with better contrast -->
+        <h1 class="mb-6 opacity-0 animate-[fade-in_0.8s_ease-out_0.3s_forwards]">
+          <span class="block text-[clamp(2.75rem,6vw,5rem)] leading-[0.95] font-display font-semibold tracking-tight text-cream-200 italic">
+            New Brunswick
+          </span>
+          <span class="block text-[clamp(2.75rem,6vw,5rem)] leading-[0.95] font-display font-bold tracking-tight text-white">
+            Church of Christ
+          </span>
+        </h1>
+
+        <!-- Tagline with accent -->
+        <p class="text-primary-200 text-lg md:text-xl max-w-lg mb-8 opacity-0 animate-[fade-in_0.8s_ease-out_0.5s_forwards]">
+          <span class="text-terra-400 font-accent text-2xl">Uplifting Christ</span> to bring salvation to the lost — a welcoming family in Lebanon, Indiana.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-wrap gap-4 opacity-0 animate-[slide-up_0.8s_ease-out_0.7s_forwards]">
+          <a href="/visit" class="btn btn-warm">
+            Plan Your Visit
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+          <a href="#service-times" class="btn btn-secondary !bg-white/10 !text-white border-white/30 hover:!bg-white/20">
+            Service Times
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Column - Service Times Card (Desktop) -->
+      <div class="hidden lg:block lg:col-span-5 xl:col-span-5 xl:col-start-8">
+        <div class="bg-white/[0.07] backdrop-blur-sm rounded-2xl p-8 border border-white/10 opacity-0 animate-[fade-in_1s_ease-out_0.9s_forwards]">
+          <h2 class="text-white font-display text-xl font-semibold mb-6 flex items-center gap-3">
+            <span class="w-2 h-2 bg-terra-400 rounded-full"></span>
+            Join Us This Sunday
+          </h2>
+
+          <div class="space-y-4">
+            <div class="flex justify-between items-baseline border-b border-white/10 pb-3">
+              <span class="text-cream-200">Sunday School</span>
+              <span class="text-white font-semibold">9:00 AM</span>
+            </div>
+            <div class="flex justify-between items-baseline border-b border-white/10 pb-3">
+              <span class="text-cream-200">Worship Service</span>
+              <span class="text-white font-semibold">10:00 AM</span>
+            </div>
+            <div class="flex justify-between items-baseline border-b border-white/10 pb-3">
+              <span class="text-cream-200">Kids Church</span>
+              <span class="text-white font-semibold text-sm">10:20 AM<span class="text-cream-300 font-normal ml-1">(after communion)</span></span>
+            </div>
+            <div class="flex justify-between items-baseline">
+              <span class="text-cream-200">Wednesday Prayer</span>
+              <span class="text-white font-semibold">7:00 PM</span>
+            </div>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-white/10">
+            <a href="/visit" class="text-terra-400 hover:text-terra-300 font-medium text-sm inline-flex items-center gap-2 transition-colors">
+              What to expect on your first visit
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll Indicator -->
+  <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 hidden lg:block">
+    <a
+      href="#welcome"
+      class="flex flex-col items-center gap-2 text-white/50 hover:text-white/80 transition-colors group"
+      aria-label="Scroll to content"
+    >
+      <span class="text-[10px] uppercase tracking-[0.25em] font-medium">Scroll</span>
+      <svg class="w-5 h-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+      </svg>
+    </a>
+  </div>
+
+  <!-- Decorative Elements -->
+  <div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-terra-500/10 to-transparent pointer-events-none"></div>
+  <div class="absolute bottom-0 left-0 w-64 h-64 bg-primary-700/20 rounded-full blur-3xl pointer-events-none"></div>
+</section>
+
+<style>
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes slide-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [class*="animate-"] {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+</style>

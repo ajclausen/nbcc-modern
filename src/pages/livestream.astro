@@ -1,0 +1,284 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import Button from '@/components/ui/Button.astro';
+import FacebookEmbed from '@/components/media/FacebookEmbed.astro';
+import { siteConfig } from '@/data/siteConfig';
+---
+
+<PageLayout
+  title="Livestream"
+  description="Watch our Sunday services live from New Brunswick Church of Christ. Join us online from anywhere!"
+  heroTitle="Watch Live"
+  heroSubtitle="Join us for worship from anywhere in the world"
+>
+  <!-- Live Stream Section -->
+  <section class="py-16 lg:py-24 relative overflow-hidden">
+    <!-- Decorative background -->
+    <div class="absolute inset-0 bg-gradient-to-br from-cream-50 via-white to-primary-50"></div>
+
+    <Container class="relative">
+      <div class="grid lg:grid-cols-3 gap-12">
+        <!-- Main Content -->
+        <div class="lg:col-span-2">
+          <div class="inline-flex items-center gap-2 mb-6">
+            <span class="w-12 h-[2px] bg-terra-500"></span>
+            <span class="text-terra-600 text-sm font-medium tracking-widest uppercase">Live Every Sunday</span>
+          </div>
+
+          <!-- Video Placeholder -->
+          <div class="bg-primary-950 rounded-2xl overflow-hidden aspect-video flex items-center justify-center mb-8 shadow-elevated relative">
+            <!-- Texture overlay -->
+            <div class="absolute inset-0 opacity-[0.05]" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E&quot;);"></div>
+
+            <div class="text-center p-8 relative z-10">
+              <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-terra-500/20 flex items-center justify-center">
+                <svg class="w-10 h-10 text-terra-400" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </div>
+              <h3 class="font-display text-2xl font-semibold text-white mb-3">
+                Live Stream
+              </h3>
+              <p class="text-primary-200 mb-8 max-w-md mx-auto">
+                Our services are broadcast live on Facebook every Sunday at 10:00 AM Eastern.
+              </p>
+              <a
+                href={siteConfig.social.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-warm inline-flex items-center gap-2"
+              >
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
+                </svg>
+                Watch on Facebook
+              </a>
+            </div>
+          </div>
+
+          <div class="space-y-4 text-lg text-stone-600 leading-relaxed">
+            <p>
+              <strong class="text-primary-800">Can't make it in person?</strong> Join us online!
+              We broadcast our Sunday morning worship service live on Facebook every week.
+              You can watch, comment, and even share prayer requests during the service.
+            </p>
+            <p>
+              Whether you're traveling, homebound, or just checking us out before visiting
+              in person, we're glad you're here.
+            </p>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="lg:col-span-1 space-y-6">
+          <!-- When We're Live -->
+          <div class="bg-primary-950 text-white rounded-2xl p-8 relative overflow-hidden">
+            <!-- Texture -->
+            <div class="absolute inset-0 opacity-[0.03]" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E&quot;);"></div>
+
+            <div class="relative">
+              <div class="flex items-center gap-2 mb-6">
+                <span class="w-2 h-2 bg-terra-400 rounded-full animate-pulse"></span>
+                <h3 class="font-display text-xl font-semibold">When We're Live</h3>
+              </div>
+
+              <div class="flex items-start gap-4 mb-6">
+                <div class="w-12 h-12 rounded-xl bg-primary-800/50 flex items-center justify-center shrink-0">
+                  <svg class="w-6 h-6 text-golden-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div>
+                  <p class="font-semibold text-white">Sunday Morning Service</p>
+                  <p class="text-2xl font-display font-bold text-terra-400">10:00 AM</p>
+                  <p class="text-primary-300 text-sm">Eastern Time</p>
+                </div>
+              </div>
+
+              <div class="pt-4 border-t border-primary-800">
+                <p class="text-sm text-primary-300">
+                  Streams typically begin a few minutes before the service starts.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Watching Online Card -->
+          <div class="bg-cream-100 rounded-2xl p-8 border border-cream-200">
+            <h3 class="font-display text-xl font-semibold text-primary-900 mb-4">
+              Watching Online?
+            </h3>
+            <p class="text-stone-600 mb-6">
+              We'd love to know you're joining us! Drop a comment during the stream
+              or reach out to let us know you're watching.
+            </p>
+            <div class="space-y-3">
+              <Button href="/contact" variant="outline" class="w-full">
+                Say Hello
+              </Button>
+              <a href="/visit" class="btn btn-primary w-full text-center">
+                Plan an In-Person Visit
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Facebook Feed Section -->
+  <section class="py-20 bg-stone-100 relative overflow-hidden">
+    <!-- Texture -->
+    <div class="absolute inset-0 opacity-[0.02]" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E&quot;);"></div>
+
+    <Container class="relative">
+      <div class="text-center mb-12">
+        <div class="inline-flex items-center gap-3 mb-4">
+          <span class="w-8 h-[1px] bg-terra-400"></span>
+          <span class="text-terra-600 text-sm font-medium tracking-widest uppercase">Stay Connected</span>
+          <span class="w-8 h-[1px] bg-terra-400"></span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-display font-semibold text-primary-900 mb-4">
+          Connect on Facebook
+        </h2>
+        <p class="text-stone-600 text-lg max-w-2xl mx-auto">
+          See our latest updates and past services
+        </p>
+      </div>
+
+      <div class="max-w-xl mx-auto">
+        <FacebookEmbed />
+      </div>
+
+      <div class="text-center mt-10">
+        <a
+          href={siteConfig.social.facebook}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-primary inline-flex items-center gap-2"
+        >
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
+          </svg>
+          Follow Us on Facebook
+        </a>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Missed the Stream -->
+  <section class="py-20 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-cream-50 to-white"></div>
+
+    <Container class="relative">
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-gradient-to-br from-terra-50 to-golden-50 rounded-2xl p-10 lg:p-14 text-center border border-terra-200 shadow-soft">
+          <div class="w-16 h-16 mx-auto mb-6 rounded-full bg-terra-100 flex items-center justify-center">
+            <svg class="w-8 h-8 text-terra-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+
+          <h2 class="text-3xl md:text-4xl font-display font-semibold text-primary-900 mb-4">
+            Missed the Live Stream?
+          </h2>
+          <p class="text-lg text-stone-600 mb-8 max-w-xl mx-auto">
+            No problem! Past services are available on our Facebook page.
+            You can watch previous sermons anytime.
+          </p>
+
+          <a
+            href={`${siteConfig.social.facebook}/videos`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-warm inline-flex items-center gap-2"
+          >
+            Watch Past Services
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Visit In Person CTA -->
+  <section class="relative py-24 overflow-hidden">
+    <div class="absolute inset-0">
+      <img
+        src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=1920&q=80"
+        alt=""
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-primary-950/90"></div>
+    </div>
+
+    <!-- Texture overlay -->
+    <div class="absolute inset-0 opacity-[0.03]" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E&quot;);"></div>
+
+    <Container class="relative z-10">
+      <div class="max-w-3xl mx-auto text-center">
+        <div class="inline-flex items-center gap-3 mb-6">
+          <span class="w-8 h-[1px] bg-golden-400"></span>
+          <span class="text-golden-400 text-sm font-medium tracking-widest uppercase">Join Us</span>
+          <span class="w-8 h-[1px] bg-golden-400"></span>
+        </div>
+
+        <h2 class="text-4xl md:text-5xl font-display font-semibold text-white mb-6">
+          Nothing Beats Being There
+        </h2>
+
+        <p class="text-primary-200 text-lg mb-10 max-w-2xl mx-auto">
+          While we love connecting online, there's something special about worshiping
+          together in person. We'd love to meet you!
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/visit" class="btn btn-warm">
+            Plan Your Visit
+          </a>
+          <Button href="/contact" variant="outline" class="!bg-white/10 !text-white border-white/30 hover:!bg-white/20">
+            Contact Us
+          </Button>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Service Times Reminder -->
+  <section class="py-16 bg-cream-100 border-t border-cream-200">
+    <Container>
+      <div class="text-center mb-10">
+        <h2 class="text-2xl md:text-3xl font-display font-semibold text-primary-900 mb-2">
+          Join Us Every Week
+        </h2>
+        <p class="text-stone-600">Our doors are always open</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto">
+        <div class="bg-white rounded-xl p-5 text-center shadow-soft border border-cream-200">
+          <p class="text-terra-600 text-sm font-medium mb-1">Sunday School</p>
+          <p class="text-2xl font-display font-semibold text-primary-900">9:00 AM</p>
+          <p class="text-stone-400 text-sm">Sundays</p>
+        </div>
+        <div class="bg-white rounded-xl p-5 text-center shadow-soft border border-cream-200">
+          <p class="text-terra-600 text-sm font-medium mb-1">Worship Service</p>
+          <p class="text-2xl font-display font-semibold text-primary-900">10:00 AM</p>
+          <p class="text-stone-400 text-sm">Sundays (Live!)</p>
+        </div>
+        <div class="bg-white rounded-xl p-5 text-center shadow-soft border border-cream-200">
+          <p class="text-terra-600 text-sm font-medium mb-1">Kids Church</p>
+          <p class="text-2xl font-display font-semibold text-primary-900">10:20 AM</p>
+          <p class="text-stone-400 text-sm">After communion</p>
+        </div>
+        <div class="bg-white rounded-xl p-5 text-center shadow-soft border border-cream-200">
+          <p class="text-terra-600 text-sm font-medium mb-1">Prayer Group</p>
+          <p class="text-2xl font-display font-semibold text-primary-900">7:00 PM</p>
+          <p class="text-stone-400 text-sm">Wednesdays</p>
+        </div>
+      </div>
+    </Container>
+  </section>
+</PageLayout>

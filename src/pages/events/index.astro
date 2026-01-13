@@ -1,0 +1,475 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import Button from '@/components/ui/Button.astro';
+import { getCollection } from 'astro:content';
+import { siteConfig } from '@/data/siteConfig';
+
+// Get all published events
+const allEvents = await getCollection('events', ({ data }) => {
+  return data.published !== false;
+});
+
+// Separate into upcoming and past events
+const now = new Date();
+now.setHours(0, 0, 0, 0);
+
+const upcomingEvents = allEvents
+  .filter((event) => new Date(event.data.date) >= now)
+  .sort((a, b) => new Date(a.data.date).getTime() - new Date(b.data.date).getTime());
+
+const pastEvents = allEvents
+  .filter((event) => new Date(event.data.date) < now)
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+  .slice(0, 6);
+
+const featuredEvent = upcomingEvents.find((e) => e.data.featured);
+const regularEvents = upcomingEvents.filter((e) => e !== featuredEvent);
+
+// Get unique categories
+const categories = [...new Set(allEvents.map((e) => e.data.category))].filter(Boolean);
+
+// Category icons
+const categoryIcons: Record<string, string> = {
+  worship: 'M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3',
+  fellowship: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z',
+  outreach: 'M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9',
+  youth: 'M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+  children: 'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z',
+  special: 'M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z',
+};
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString('en-US', {
+    weekday: 'long',
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric'
+  });
+}
+
+function getMonthName(date: Date) {
+  return date.toLocaleDateString('en-US', { month: 'short' }).toUpperCase();
+}
+---
+
+<PageLayout
+  title="Events & Gatherings"
+  description="Discover upcoming events at New Brunswick Church of Christ. Join us for worship, fellowship, and community gatherings in Lebanon, Indiana."
+  heroTitle="Events & Gatherings"
+  heroSubtitle="Life is better together — join us for worship, fellowship, and community"
+>
+  <!-- Category Quick Nav -->
+  <section class="py-8 bg-cream-100 border-b border-cream-300">
+    <Container>
+      <div class="flex flex-wrap items-center justify-center gap-3">
+        <span class="text-stone-500 text-sm font-medium mr-2">Browse by:</span>
+        {categories.map((category) => (
+          <a
+            href={`#${category}`}
+            class="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full text-sm font-medium text-stone-600 hover:text-primary-700 hover:bg-primary-50 transition-colors shadow-sm border border-cream-200 capitalize"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d={categoryIcons[category as string] || categoryIcons.special} />
+            </svg>
+            {category}
+          </a>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- Featured Event -->
+  {featuredEvent && (
+    <section class="py-16 lg:py-24 relative overflow-hidden">
+      <!-- Decorative background -->
+      <div class="absolute inset-0 bg-gradient-to-br from-cream-50 via-white to-primary-50"></div>
+      <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-terra-100/20 to-transparent"></div>
+
+      <Container class="relative">
+        <div class="flex items-center gap-3 mb-8">
+          <span class="w-12 h-[2px] bg-terra-500"></span>
+          <span class="text-terra-600 text-sm font-medium tracking-widest uppercase">Featured Event</span>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <!-- Image -->
+          <div class="relative">
+            <div class="aspect-[4/3] rounded-2xl overflow-hidden shadow-elevated">
+              {featuredEvent.data.image ? (
+                <img
+                  src={featuredEvent.data.image}
+                  alt={featuredEvent.data.imageAlt || ''}
+                  class="w-full h-full object-cover"
+                  loading="eager"
+                />
+              ) : (
+                <div class="w-full h-full bg-gradient-to-br from-primary-200 to-primary-300 flex items-center justify-center">
+                  <svg class="w-24 h-24 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                </div>
+              )}
+            </div>
+
+            <!-- Floating date card -->
+            <div class="absolute -bottom-6 -right-6 bg-primary-900 text-white rounded-xl p-5 shadow-elevated hidden md:block">
+              <p class="text-terra-400 text-xs font-medium tracking-widest uppercase">{getMonthName(new Date(featuredEvent.data.date))}</p>
+              <p class="text-4xl font-display font-bold">{new Date(featuredEvent.data.date).getDate()}</p>
+            </div>
+
+            <!-- Decorative element -->
+            <div class="absolute -top-4 -left-4 w-24 h-24 bg-terra-100 rounded-2xl -z-10"></div>
+          </div>
+
+          <!-- Content -->
+          <div>
+            <div class="flex flex-wrap items-center gap-3 mb-4">
+              {featuredEvent.data.category && (
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-terra-100 text-terra-700 rounded-full text-sm font-medium capitalize">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d={categoryIcons[featuredEvent.data.category] || categoryIcons.special} />
+                  </svg>
+                  {featuredEvent.data.category}
+                </span>
+              )}
+              <span class="text-stone-400">•</span>
+              <span class="text-stone-500 text-sm">{formatDate(new Date(featuredEvent.data.date))}</span>
+            </div>
+
+            <h2 class="text-4xl md:text-5xl font-display font-semibold text-primary-900 mb-4 leading-tight">
+              {featuredEvent.data.title}
+            </h2>
+
+            <p class="text-lg text-stone-600 mb-6 leading-relaxed">
+              {featuredEvent.data.description}
+            </p>
+
+            <!-- Event Details -->
+            <div class="flex flex-wrap gap-6 mb-8">
+              {featuredEvent.data.time && (
+                <div class="flex items-center gap-2 text-stone-600">
+                  <div class="w-10 h-10 rounded-lg bg-primary-100 flex items-center justify-center">
+                    <svg class="w-5 h-5 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="text-xs text-stone-400 uppercase tracking-wide">Time</p>
+                    <p class="font-semibold text-primary-900">{featuredEvent.data.time}</p>
+                  </div>
+                </div>
+              )}
+              {featuredEvent.data.location && (
+                <div class="flex items-center gap-2 text-stone-600">
+                  <div class="w-10 h-10 rounded-lg bg-primary-100 flex items-center justify-center">
+                    <svg class="w-5 h-5 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="text-xs text-stone-400 uppercase tracking-wide">Location</p>
+                    <p class="font-semibold text-primary-900">{featuredEvent.data.location}</p>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <Button href={`/events/${featuredEvent.id}`} variant="primary">
+              View Event Details
+            </Button>
+          </div>
+        </div>
+      </Container>
+    </section>
+  )}
+
+  <!-- Upcoming Events Timeline -->
+  <section class="py-20 bg-stone-100 relative overflow-hidden">
+    <!-- Texture -->
+    <div class="absolute inset-0 opacity-[0.02]" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E&quot;);"></div>
+
+    <Container class="relative">
+      <div class="text-center mb-16">
+        <div class="inline-flex items-center gap-3 mb-4">
+          <span class="w-8 h-[1px] bg-terra-400"></span>
+          <span class="text-terra-600 text-sm font-medium tracking-widest uppercase">What's Coming Up</span>
+          <span class="w-8 h-[1px] bg-terra-400"></span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-display font-semibold text-primary-900 mb-4">
+          Upcoming Events
+        </h2>
+        <p class="text-stone-600 text-lg max-w-2xl mx-auto">
+          From worship services to community gatherings, there's always something happening at NBCC
+        </p>
+      </div>
+
+      {regularEvents.length > 0 ? (
+        <div class="space-y-6">
+          {regularEvents.map((event, index) => (
+            <article
+              class="group bg-white rounded-2xl overflow-hidden shadow-soft hover:shadow-card transition-all duration-300 border border-cream-200"
+              id={event.data.category || undefined}
+            >
+              <div class="grid md:grid-cols-[auto,1fr,auto] items-stretch">
+                <!-- Date Column -->
+                <div class="hidden md:flex flex-col items-center justify-center w-32 bg-gradient-to-b from-primary-800 to-primary-900 text-white p-6">
+                  <span class="text-primary-300 text-xs font-medium tracking-widest uppercase">
+                    {getMonthName(new Date(event.data.date))}
+                  </span>
+                  <span class="text-5xl font-display font-bold">
+                    {new Date(event.data.date).getDate()}
+                  </span>
+                  <span class="text-primary-300 text-sm">
+                    {new Date(event.data.date).toLocaleDateString('en-US', { weekday: 'short' })}
+                  </span>
+                </div>
+
+                <!-- Content -->
+                <div class="p-6 md:p-8 flex flex-col justify-center">
+                  <!-- Mobile date -->
+                  <div class="flex md:hidden items-center gap-2 mb-3">
+                    <span class="text-terra-600 font-semibold">
+                      {formatDate(new Date(event.data.date))}
+                    </span>
+                  </div>
+
+                  <div class="flex flex-wrap items-center gap-3 mb-2">
+                    {event.data.category && (
+                      <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-cream-200 text-stone-600 rounded-full text-xs font-medium capitalize">
+                        {event.data.category}
+                      </span>
+                    )}
+                    {event.data.time && (
+                      <span class="text-stone-400 text-sm flex items-center gap-1">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        {event.data.time}
+                      </span>
+                    )}
+                    {event.data.location && (
+                      <span class="text-stone-400 text-sm flex items-center gap-1">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        </svg>
+                        {event.data.location}
+                      </span>
+                    )}
+                  </div>
+
+                  <h3 class="text-xl md:text-2xl font-display font-semibold text-primary-900 mb-2 group-hover:text-primary-700 transition-colors">
+                    <a href={`/events/${event.id}`} class="hover:underline underline-offset-4">
+                      {event.data.title}
+                    </a>
+                  </h3>
+
+                  <p class="text-stone-600 line-clamp-2">
+                    {event.data.description}
+                  </p>
+                </div>
+
+                <!-- Image/Action Column -->
+                <div class="hidden lg:block w-72 relative overflow-hidden">
+                  {event.data.image ? (
+                    <img
+                      src={event.data.image}
+                      alt=""
+                      class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div class="absolute inset-0 bg-gradient-to-br from-primary-100 to-cream-200 flex items-center justify-center">
+                      <svg class="w-16 h-16 text-primary-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1">
+                        <path stroke-linecap="round" stroke-linejoin="round" d={categoryIcons[event.data.category as string] || categoryIcons.special} />
+                      </svg>
+                    </div>
+                  )}
+                  <div class="absolute inset-0 bg-gradient-to-r from-white/80 to-transparent"></div>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      ) : !featuredEvent ? (
+        <div class="text-center py-16 bg-white rounded-2xl shadow-soft border border-cream-200">
+          <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-cream-100 flex items-center justify-center">
+            <svg class="w-10 h-10 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <h3 class="text-2xl font-display font-semibold text-primary-900 mb-3">
+            No Upcoming Events
+          </h3>
+          <p class="text-stone-600 mb-6 max-w-md mx-auto">
+            We don't have any events scheduled right now, but check back soon or follow us on Facebook for updates!
+          </p>
+          <a
+            href={siteConfig.social.facebook}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-primary inline-flex items-center gap-2"
+          >
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
+            </svg>
+            Follow on Facebook
+          </a>
+        </div>
+      ) : (
+        <p class="text-center text-stone-500 py-8">
+          Check out our featured event above, and stay tuned for more!
+        </p>
+      )}
+    </Container>
+  </section>
+
+  <!-- Past Events Gallery -->
+  {pastEvents.length > 0 && (
+    <section class="py-20 bg-cream-50">
+      <Container>
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12">
+          <div>
+            <div class="inline-flex items-center gap-2 mb-3">
+              <span class="w-8 h-[2px] bg-terra-400"></span>
+              <span class="text-terra-600 text-sm font-medium tracking-wide uppercase">Looking Back</span>
+            </div>
+            <h2 class="text-3xl md:text-4xl font-display font-semibold text-primary-900">
+              Recent Events
+            </h2>
+          </div>
+          <p class="text-stone-500 max-w-md">
+            See what we've been up to recently at NBCC
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {pastEvents.map((event) => (
+            <article class="group bg-white rounded-xl overflow-hidden shadow-soft border border-cream-200 opacity-80 hover:opacity-100 transition-opacity">
+              <div class="aspect-video relative overflow-hidden bg-gradient-to-br from-stone-100 to-stone-200">
+                {event.data.image ? (
+                  <img
+                    src={event.data.image}
+                    alt=""
+                    class="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-500"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div class="w-full h-full flex items-center justify-center">
+                    <svg class="w-12 h-12 text-stone-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1">
+                      <path stroke-linecap="round" stroke-linejoin="round" d={categoryIcons[event.data.category as string] || categoryIcons.special} />
+                    </svg>
+                  </div>
+                )}
+                <div class="absolute top-3 left-3">
+                  <span class="px-2 py-1 bg-stone-900/70 text-white text-xs rounded-full">
+                    {new Date(event.data.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                  </span>
+                </div>
+              </div>
+              <div class="p-5">
+                <h3 class="font-display font-semibold text-primary-900 mb-1 group-hover:text-primary-700 transition-colors">
+                  {event.data.title}
+                </h3>
+                <p class="text-stone-500 text-sm line-clamp-2">
+                  {event.data.description}
+                </p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </Container>
+    </section>
+  )}
+
+  <!-- Stay Connected CTA -->
+  <section class="relative py-24 overflow-hidden">
+    <div class="absolute inset-0">
+      <img
+        src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=1920&q=80"
+        alt=""
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-primary-950/90"></div>
+    </div>
+
+    <!-- Texture overlay -->
+    <div class="absolute inset-0 opacity-[0.03]" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E&quot;);"></div>
+
+    <Container class="relative z-10">
+      <div class="max-w-3xl mx-auto text-center">
+        <div class="inline-flex items-center gap-3 mb-6">
+          <span class="w-8 h-[1px] bg-golden-400"></span>
+          <span class="text-golden-400 text-sm font-medium tracking-widest uppercase">Stay Connected</span>
+          <span class="w-8 h-[1px] bg-golden-400"></span>
+        </div>
+
+        <h2 class="text-4xl md:text-5xl font-display font-semibold text-white mb-6">
+          Never Miss a Gathering
+        </h2>
+
+        <p class="text-primary-200 text-lg mb-10 max-w-2xl mx-auto">
+          Follow us on Facebook to stay up-to-date with all our events, announcements, and the latest from our church family.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href={siteConfig.social.facebook}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-warm inline-flex items-center gap-3"
+          >
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
+            </svg>
+            Follow on Facebook
+          </a>
+          <Button href="/contact" variant="outline" class="!bg-white/10 !text-white border-white/30 hover:!bg-white/20">
+            Contact Us
+          </Button>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Weekly Schedule Reminder -->
+  <section class="py-16 bg-cream-100 border-t border-cream-200">
+    <Container>
+      <div class="text-center mb-10">
+        <h2 class="text-2xl md:text-3xl font-display font-semibold text-primary-900 mb-2">
+          Join Us Every Week
+        </h2>
+        <p class="text-stone-600">Our doors are always open</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto">
+        <div class="bg-white rounded-xl p-5 text-center shadow-soft border border-cream-200">
+          <p class="text-terra-600 text-sm font-medium mb-1">Sunday School</p>
+          <p class="text-2xl font-display font-semibold text-primary-900">9:00 AM</p>
+          <p class="text-stone-400 text-sm">Sundays</p>
+        </div>
+        <div class="bg-white rounded-xl p-5 text-center shadow-soft border border-cream-200">
+          <p class="text-terra-600 text-sm font-medium mb-1">Worship Service</p>
+          <p class="text-2xl font-display font-semibold text-primary-900">10:00 AM</p>
+          <p class="text-stone-400 text-sm">Sundays</p>
+        </div>
+        <div class="bg-white rounded-xl p-5 text-center shadow-soft border border-cream-200">
+          <p class="text-terra-600 text-sm font-medium mb-1">Kids Church</p>
+          <p class="text-2xl font-display font-semibold text-primary-900">10:20 AM</p>
+          <p class="text-stone-400 text-sm">After communion</p>
+        </div>
+        <div class="bg-white rounded-xl p-5 text-center shadow-soft border border-cream-200">
+          <p class="text-terra-600 text-sm font-medium mb-1">Prayer Group</p>
+          <p class="text-2xl font-display font-semibold text-primary-900">7:00 PM</p>
+          <p class="text-stone-400 text-sm">Wednesdays</p>
+        </div>
+      </div>
+
+      <div class="text-center mt-8">
+        <Button href="/visit" variant="outline">
+          Plan Your First Visit
+        </Button>
+      </div>
+    </Container>
+  </section>
+</PageLayout>

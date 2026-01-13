@@ -1,0 +1,348 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import Button from '@/components/ui/Button.astro';
+import { siteConfig } from '@/data/siteConfig';
+
+const values = [
+  {
+    title: 'Faith in Christ',
+    description: 'We believe Jesus is the Son of God, our Savior, and the foundation of everything we do.',
+    icon: 'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z',
+  },
+  {
+    title: 'Biblical Teaching',
+    description: 'The Bible is our guide for faith and life. We study it together and apply its truths.',
+    icon: 'M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253',
+  },
+  {
+    title: 'Welcoming Community',
+    description: 'Everyone is welcome here. We strive to create a place where all feel loved and valued.',
+    icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z',
+  },
+  {
+    title: 'Serving Others',
+    description: 'Following Christ means serving others. We look for ways to bless our community.',
+    icon: 'M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9',
+  },
+];
+
+const milestones = [
+  { year: '1856', event: 'New Brunswick Church of Christ founded by a small group of believers' },
+  { year: '1870s', event: 'First permanent church building constructed' },
+  { year: '1920s', event: 'Church survived as the town of New Brunswick faded away' },
+  { year: '1970s', event: 'Major renovation and expansion of facilities' },
+  { year: 'Today', event: 'Continuing to serve Lebanon, Indiana and the surrounding community' },
+];
+---
+
+<PageLayout
+  title="About Us"
+  description="Learn about New Brunswick Church of Christ - a Spirit-filled, non-denominational church family serving Lebanon, Indiana since 1856."
+  heroTitle="Our Story"
+  heroSubtitle="A Spirit-filled community of faith serving Lebanon, Indiana since 1856"
+>
+  <!-- History Section -->
+  <section class="py-20 lg:py-28 relative overflow-hidden">
+    <!-- Decorative background -->
+    <div class="absolute inset-0 bg-gradient-to-br from-cream-50 via-white to-primary-50"></div>
+    <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-terra-100/20 to-transparent"></div>
+
+    <Container class="relative">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <!-- Image with editorial treatment -->
+        <div class="relative order-2 lg:order-1">
+          <div class="relative">
+            <!-- Main Image -->
+            <div class="aspect-[4/3] rounded-2xl overflow-hidden shadow-elevated">
+              <img
+                src="https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?w=800&q=80"
+                alt="Historic church interior"
+                class="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+
+            <!-- Floating year badge -->
+            <div class="absolute -bottom-6 -right-6 bg-primary-900 text-white rounded-xl p-5 shadow-elevated hidden md:block">
+              <p class="text-terra-400 text-xs font-medium tracking-widest uppercase">Founded</p>
+              <p class="text-4xl font-display font-bold">{siteConfig.founded}</p>
+            </div>
+
+            <!-- Decorative element -->
+            <div class="absolute -top-4 -left-4 w-24 h-24 bg-terra-100 rounded-2xl -z-10"></div>
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div class="order-1 lg:order-2">
+          <div class="inline-flex items-center gap-2 mb-6">
+            <span class="w-12 h-[2px] bg-terra-500"></span>
+            <span class="text-terra-600 text-sm font-medium tracking-widest uppercase">Our Heritage</span>
+          </div>
+
+          <h2 class="text-4xl md:text-5xl font-display font-semibold text-primary-900 mb-6 leading-tight">
+            Over 165 Years<br />
+            <span class="text-terra-600 italic">of Faithful Ministry</span>
+          </h2>
+
+          <div class="space-y-5 text-lg text-stone-600 leading-relaxed">
+            <p>
+              In <strong class="text-primary-800 font-semibold">1856</strong>, a small group of believers
+              gathered in the tiny town of New Brunswick, Indiana to worship together. They built a simple
+              church-house and committed themselves to following Christ and serving their community.
+            </p>
+            <p>
+              Though the town of New Brunswick no longer exists, the church has continued for over 165 years.
+              What began as a small congregation in a single room has grown into a vibrant church family
+              that continues to preach the gospel and provide community support.
+            </p>
+            <p>
+              Today, New Brunswick Church of Christ remains committed to the same mission:
+              <strong class="text-primary-800">uplifting Christ to bring salvation to the lost</strong>.
+              We are an independent, non-denominational church rooted in the Restoration Movement.
+            </p>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Mission Section -->
+  <section class="py-20 bg-primary-950 text-white relative overflow-hidden">
+    <!-- Texture overlay -->
+    <div class="absolute inset-0 opacity-[0.03]" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E&quot;);"></div>
+
+    <!-- Decorative elements -->
+    <div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-terra-500/10 to-transparent pointer-events-none"></div>
+    <div class="absolute bottom-0 left-0 w-64 h-64 bg-primary-700/20 rounded-full blur-3xl pointer-events-none"></div>
+
+    <Container class="relative">
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="inline-flex items-center gap-3 mb-6">
+          <span class="w-8 h-[1px] bg-golden-400"></span>
+          <span class="text-golden-400 text-sm font-medium tracking-widest uppercase">Our Mission</span>
+          <span class="w-8 h-[1px] bg-golden-400"></span>
+        </div>
+
+        <blockquote class="relative mb-10">
+          <div class="absolute -top-4 -left-4 text-8xl font-display text-primary-700/30 leading-none">"</div>
+          <p class="text-3xl md:text-4xl lg:text-5xl font-display text-cream-100 italic leading-tight relative z-10 px-8">
+            {siteConfig.tagline}
+          </p>
+          <div class="absolute -bottom-8 -right-4 text-8xl font-display text-primary-700/30 leading-none rotate-180">"</div>
+        </blockquote>
+
+        <p class="text-lg text-primary-200 max-w-2xl mx-auto">
+          Everything we do flows from this mission. Whether we're gathering for worship,
+          studying the Bible, serving our neighbors, or simply sharing a meal together,
+          our goal is to point people to Jesus and His love for all.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Timeline Section -->
+  <section class="py-20 bg-stone-100 relative overflow-hidden">
+    <!-- Texture -->
+    <div class="absolute inset-0 opacity-[0.02]" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E&quot;);"></div>
+
+    <Container class="relative">
+      <div class="text-center mb-16">
+        <div class="inline-flex items-center gap-3 mb-4">
+          <span class="w-8 h-[1px] bg-terra-400"></span>
+          <span class="text-terra-600 text-sm font-medium tracking-widest uppercase">Our Journey</span>
+          <span class="w-8 h-[1px] bg-terra-400"></span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-display font-semibold text-primary-900 mb-4">
+          Milestones of Faith
+        </h2>
+        <p class="text-stone-600 text-lg max-w-2xl mx-auto">
+          A brief look at God's faithfulness through our history
+        </p>
+      </div>
+
+      <div class="max-w-3xl mx-auto">
+        <div class="relative">
+          <!-- Vertical line -->
+          <div class="absolute left-8 md:left-1/2 top-0 bottom-0 w-[2px] bg-primary-200 -translate-x-1/2"></div>
+
+          {milestones.map((milestone, index) => (
+            <div class={`relative flex items-center gap-6 mb-8 last:mb-0 ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+              <!-- Year badge -->
+              <div class="relative z-10 w-16 h-16 rounded-full bg-primary-900 flex items-center justify-center shrink-0 shadow-lg">
+                <span class="text-white font-display font-bold text-sm">{milestone.year}</span>
+              </div>
+
+              <!-- Content card -->
+              <div class={`flex-1 bg-white rounded-xl p-5 shadow-soft border border-cream-200 ${index % 2 === 0 ? 'md:mr-auto md:ml-0' : 'md:ml-auto md:mr-0'} md:max-w-[calc(50%-4rem)]`}>
+                <p class="text-stone-700">{milestone.event}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Values Section -->
+  <section class="py-20 lg:py-28 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-cream-50 to-white"></div>
+
+    <Container class="relative">
+      <div class="text-center mb-16">
+        <div class="inline-flex items-center gap-3 mb-4">
+          <span class="w-8 h-[1px] bg-terra-400"></span>
+          <span class="text-terra-600 text-sm font-medium tracking-widest uppercase">Our Heart</span>
+          <span class="w-8 h-[1px] bg-terra-400"></span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-display font-semibold text-primary-900 mb-4">
+          What We Value
+        </h2>
+        <p class="text-stone-600 text-lg max-w-2xl mx-auto">
+          The principles that guide our church family
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {values.map((value, index) => (
+          <div class="group bg-white rounded-2xl p-8 shadow-soft hover:shadow-card transition-all duration-300 border border-cream-200 relative overflow-hidden">
+            <!-- Number badge -->
+            <div class="absolute -top-3 -left-3 w-10 h-10 bg-terra-500 rounded-xl flex items-center justify-center font-display font-bold text-lg text-white shadow-lg">
+              {index + 1}
+            </div>
+
+            <div class="w-14 h-14 mx-auto mb-5 rounded-2xl bg-gradient-to-br from-primary-100 to-primary-200 flex items-center justify-center group-hover:scale-110 transition-transform">
+              <svg class="w-7 h-7 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d={value.icon} />
+              </svg>
+            </div>
+
+            <h3 class="font-display text-xl font-semibold text-primary-900 mb-3 text-center">
+              {value.title}
+            </h3>
+            <p class="text-stone-600 text-center leading-relaxed">
+              {value.description}
+            </p>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- Community Section -->
+  <section class="py-20 lg:py-28">
+    <Container>
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <!-- Content -->
+        <div>
+          <div class="inline-flex items-center gap-2 mb-6">
+            <span class="w-12 h-[2px] bg-terra-500"></span>
+            <span class="text-terra-600 text-sm font-medium tracking-widest uppercase">Our Family</span>
+          </div>
+
+          <h2 class="text-4xl md:text-5xl font-display font-semibold text-primary-900 mb-6 leading-tight">
+            A Place to<br />
+            <span class="text-terra-600 italic">Belong</span>
+          </h2>
+
+          <div class="space-y-5 text-lg text-stone-600 leading-relaxed mb-8">
+            <p>
+              At NBCC, we're not just a congregation—we're a <strong class="text-primary-800">family</strong>.
+              We laugh together, cry together, pray together, and grow together. We believe that faith is
+              meant to be lived in community.
+            </p>
+            <p>
+              Whether you're new to faith, returning after time away, or looking for a church home,
+              you'll find a warm welcome here. We're a diverse group of people from all walks of life,
+              united by our love for Jesus and each other.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap gap-4">
+            <a href="/visit" class="btn btn-warm">
+              Plan Your Visit
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+            <Button href="/beliefs" variant="outline">
+              What We Believe
+            </Button>
+          </div>
+        </div>
+
+        <!-- Image Grid -->
+        <div class="grid grid-cols-2 gap-4">
+          <img
+            src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=400&q=80"
+            alt="Church community gathering"
+            class="rounded-2xl shadow-soft w-full aspect-square object-cover"
+            loading="lazy"
+          />
+          <img
+            src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=400&q=80"
+            alt="People in fellowship"
+            class="rounded-2xl shadow-soft w-full aspect-square object-cover mt-8"
+            loading="lazy"
+          />
+          <img
+            src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=400&q=80"
+            alt="Community service"
+            class="rounded-2xl shadow-soft w-full aspect-square object-cover -mt-8"
+            loading="lazy"
+          />
+          <img
+            src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=400&q=80"
+            alt="Worship together"
+            class="rounded-2xl shadow-soft w-full aspect-square object-cover"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- CTA -->
+  <section class="relative py-24 overflow-hidden">
+    <div class="absolute inset-0">
+      <img
+        src="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=1920&q=80"
+        alt=""
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-primary-950/90"></div>
+    </div>
+
+    <!-- Texture overlay -->
+    <div class="absolute inset-0 opacity-[0.03]" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E&quot;);"></div>
+
+    <Container class="relative z-10">
+      <div class="max-w-3xl mx-auto text-center">
+        <div class="inline-flex items-center gap-3 mb-6">
+          <span class="w-8 h-[1px] bg-golden-400"></span>
+          <span class="text-golden-400 text-sm font-medium tracking-widest uppercase">Join Us</span>
+          <span class="w-8 h-[1px] bg-golden-400"></span>
+        </div>
+
+        <h2 class="text-4xl md:text-5xl font-display font-semibold text-white mb-6">
+          Come See for Yourself
+        </h2>
+
+        <p class="text-primary-200 text-lg mb-10 max-w-2xl mx-auto">
+          The best way to know NBCC is to visit. We'd love to meet you this Sunday and
+          show you what our church family is all about.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/visit" class="btn btn-warm">
+            Plan Your Visit
+          </a>
+          <Button href="/contact" variant="outline" class="!bg-white/10 !text-white border-white/30 hover:!bg-white/20">
+            Contact Us
+          </Button>
+        </div>
+      </div>
+    </Container>
+  </section>
+</PageLayout>

@@ -1,0 +1,222 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import Button from '@/components/ui/Button.astro';
+import Icon from '@/components/ui/Icon.astro';
+import LocationCard from '@/components/sections/LocationCard.astro';
+import { siteConfig } from '@/data/siteConfig';
+---
+
+<PageLayout
+  title="Contact Us"
+  description="Get in touch with New Brunswick Church of Christ. We'd love to hear from you!"
+  heroTitle="Contact Us"
+  heroSubtitle="We'd love to hear from you"
+>
+  <!-- Contact Form & Info -->
+  <section class="py-20">
+    <Container>
+      <div class="grid lg:grid-cols-2 gap-12">
+        <!-- Contact Form -->
+        <div>
+          <h2 class="text-2xl font-heading font-semibold text-primary-900 mb-6">
+            Send Us a Message
+          </h2>
+
+          <form
+            action="#"
+            method="POST"
+            class="space-y-6"
+            name="contact"
+            data-netlify="true"
+          >
+            <input type="hidden" name="form-name" value="contact" />
+
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label for="name" class="block text-sm font-medium text-neutral-700 mb-2">
+                  Your Name *
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  class="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
+                  placeholder="John Doe"
+                />
+              </div>
+              <div>
+                <label for="email" class="block text-sm font-medium text-neutral-700 mb-2">
+                  Email Address *
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  class="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
+                  placeholder="john@example.com"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label for="phone" class="block text-sm font-medium text-neutral-700 mb-2">
+                Phone Number (optional)
+              </label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                class="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
+                placeholder="(555) 123-4567"
+              />
+            </div>
+
+            <div>
+              <label for="subject" class="block text-sm font-medium text-neutral-700 mb-2">
+                Subject
+              </label>
+              <select
+                id="subject"
+                name="subject"
+                class="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
+              >
+                <option value="">Select a topic...</option>
+                <option value="general">General Question</option>
+                <option value="visit">Planning a Visit</option>
+                <option value="prayer">Prayer Request</option>
+                <option value="volunteer">Volunteering</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="message" class="block text-sm font-medium text-neutral-700 mb-2">
+                Your Message *
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                rows="5"
+                required
+                class="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors resize-y"
+                placeholder="How can we help you?"
+              ></textarea>
+            </div>
+
+            <Button type="submit" size="lg">
+              Send Message
+            </Button>
+          </form>
+
+          <p class="text-sm text-neutral-500 mt-4">
+            * Required fields. We typically respond within 1-2 business days.
+          </p>
+        </div>
+
+        <!-- Contact Info -->
+        <div>
+          <h2 class="text-2xl font-heading font-semibold text-primary-900 mb-6">
+            Other Ways to Reach Us
+          </h2>
+
+          <div class="space-y-6 mb-8">
+            <!-- Phone -->
+            <a
+              href={`tel:${siteConfig.contact.phone}`}
+              class="flex items-start gap-4 p-4 bg-neutral-50 rounded-xl hover:bg-neutral-100 transition-colors group"
+            >
+              <div class="w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center shrink-0 group-hover:bg-primary-200 transition-colors">
+                <Icon name="phone" class="text-primary-600" />
+              </div>
+              <div>
+                <h3 class="font-semibold text-primary-900">Call Us</h3>
+                <p class="text-neutral-600">{siteConfig.contact.phoneFormatted}</p>
+              </div>
+            </a>
+
+            <!-- Email -->
+            <a
+              href={`mailto:${siteConfig.contact.email}`}
+              class="flex items-start gap-4 p-4 bg-neutral-50 rounded-xl hover:bg-neutral-100 transition-colors group"
+            >
+              <div class="w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center shrink-0 group-hover:bg-primary-200 transition-colors">
+                <Icon name="email" class="text-primary-600" />
+              </div>
+              <div>
+                <h3 class="font-semibold text-primary-900">Email Us</h3>
+                <p class="text-neutral-600">{siteConfig.contact.email}</p>
+              </div>
+            </a>
+
+            <!-- Visit -->
+            <a
+              href={siteConfig.contact.mapUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-start gap-4 p-4 bg-neutral-50 rounded-xl hover:bg-neutral-100 transition-colors group"
+            >
+              <div class="w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center shrink-0 group-hover:bg-primary-200 transition-colors">
+                <Icon name="map" class="text-primary-600" />
+              </div>
+              <div>
+                <h3 class="font-semibold text-primary-900">Visit Us</h3>
+                <p class="text-neutral-600">
+                  {siteConfig.contact.address}<br />
+                  {siteConfig.contact.city}, {siteConfig.contact.state} {siteConfig.contact.zip}
+                </p>
+              </div>
+            </a>
+
+            <!-- Facebook -->
+            <a
+              href={siteConfig.social.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-start gap-4 p-4 bg-neutral-50 rounded-xl hover:bg-neutral-100 transition-colors group"
+            >
+              <div class="w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center shrink-0 group-hover:bg-primary-200 transition-colors">
+                <Icon name="facebook" class="text-primary-600" />
+              </div>
+              <div>
+                <h3 class="font-semibold text-primary-900">Facebook</h3>
+                <p class="text-neutral-600">Message us or follow for updates</p>
+              </div>
+            </a>
+          </div>
+
+          <!-- Office Hours -->
+          <div class="bg-secondary-50 rounded-xl p-6 border border-secondary-200">
+            <h3 class="font-heading text-lg font-semibold text-primary-900 mb-3">
+              Office Hours
+            </h3>
+            <p class="text-neutral-600 mb-2">
+              The church office hours may vary. For the quickest response, we recommend
+              calling during typical business hours or leaving a voicemail.
+            </p>
+            <p class="text-sm text-neutral-500">
+              We check messages regularly and will get back to you as soon as possible.
+            </p>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Map Section -->
+  <section class="py-20 bg-neutral-50">
+    <Container>
+      <SectionHeading
+        title="Find Us"
+        subtitle="Located on State Road 39 in Lebanon, Indiana"
+      />
+
+      <div class="max-w-2xl mx-auto">
+        <LocationCard />
+      </div>
+    </Container>
+  </section>
+</PageLayout>
