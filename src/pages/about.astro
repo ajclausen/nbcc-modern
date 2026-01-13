@@ -162,21 +162,51 @@ const milestones = [
         </p>
       </div>
 
-      <div class="max-w-3xl mx-auto">
+      <div class="max-w-4xl mx-auto">
         <div class="relative">
-          <!-- Vertical line -->
-          <div class="absolute left-8 md:left-1/2 top-0 bottom-0 w-[2px] bg-primary-200 -translate-x-1/2"></div>
+          <!-- Vertical line - centered -->
+          <div class="absolute left-8 md:left-1/2 top-0 bottom-0 w-[2px] bg-primary-200 md:-translate-x-px"></div>
 
           {milestones.map((milestone, index) => (
-            <div class={`relative flex items-center gap-6 mb-8 last:mb-0 ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
-              <!-- Year badge -->
-              <div class="relative z-10 w-16 h-16 rounded-full bg-primary-900 flex items-center justify-center shrink-0 shadow-lg">
-                <span class="text-white font-display font-bold text-sm">{milestone.year}</span>
+            <div class="relative mb-12 last:mb-0">
+              <!-- Mobile layout -->
+              <div class="flex items-start gap-6 md:hidden">
+                <div class="relative z-10 w-16 h-16 rounded-full bg-primary-900 flex items-center justify-center shrink-0 shadow-lg">
+                  <span class="text-white font-display font-bold text-sm">{milestone.year}</span>
+                </div>
+                <div class="flex-1 bg-white rounded-xl p-5 shadow-soft border border-cream-200">
+                  <p class="text-stone-700">{milestone.event}</p>
+                </div>
               </div>
 
-              <!-- Content card -->
-              <div class={`flex-1 bg-white rounded-xl p-5 shadow-soft border border-cream-200 ${index % 2 === 0 ? 'md:mr-auto md:ml-0' : 'md:ml-auto md:mr-0'} md:max-w-[calc(50%-4rem)]`}>
-                <p class="text-stone-700">{milestone.event}</p>
+              <!-- Desktop layout - date centered, text alternating -->
+              <div class="hidden md:flex md:items-center md:justify-center">
+                <!-- Left side -->
+                <div class="flex-1 pr-8">
+                  {index % 2 === 0 ? (
+                    <div class="bg-white rounded-xl p-5 shadow-soft border border-cream-200 text-right ml-auto max-w-md">
+                      <p class="text-stone-700">{milestone.event}</p>
+                    </div>
+                  ) : (
+                    <div></div>
+                  )}
+                </div>
+
+                <!-- Center date badge -->
+                <div class="relative z-10 w-16 h-16 rounded-full bg-primary-900 flex items-center justify-center shrink-0 shadow-lg">
+                  <span class="text-white font-display font-bold text-sm">{milestone.year}</span>
+                </div>
+
+                <!-- Right side -->
+                <div class="flex-1 pl-8">
+                  {index % 2 !== 0 ? (
+                    <div class="bg-white rounded-xl p-5 shadow-soft border border-cream-200 text-left mr-auto max-w-md">
+                      <p class="text-stone-700">{milestone.event}</p>
+                    </div>
+                  ) : (
+                    <div></div>
+                  )}
+                </div>
               </div>
             </div>
           ))}
@@ -208,8 +238,8 @@ const milestones = [
         {values.map((value, index) => (
           <div class="group bg-white rounded-2xl p-8 shadow-soft hover:shadow-card transition-all duration-300 border border-cream-200 relative overflow-hidden">
             <!-- Number badge -->
-            <div class="absolute -top-3 -left-3 w-10 h-10 bg-terra-500 rounded-xl flex items-center justify-center font-display font-bold text-lg text-white shadow-lg">
-              {index + 1}
+            <div class="absolute -top-3 -left-3 w-12 h-12 bg-terra-500 rounded-xl flex items-center justify-center font-display font-bold text-lg text-white shadow-lg leading-none">
+              <span class="translate-x-px translate-y-0.5 tabular-nums">{index + 1}</span>
             </div>
 
             <div class="w-14 h-14 mx-auto mb-5 rounded-2xl bg-gradient-to-br from-primary-100 to-primary-200 flex items-center justify-center group-hover:scale-110 transition-transform">
