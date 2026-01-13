@@ -1,0 +1,497 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import Button from '@/components/ui/Button.astro';
+
+// Stats
+const stats = [
+  { value: '200+', label: 'Families Served Monthly' },
+  { value: '15', label: 'Years of Service' },
+  { value: '50+', label: 'Regular Volunteers' },
+  { value: '12K+', label: 'Meals Provided Annually' },
+];
+
+// How we serve
+const services = [
+  {
+    title: 'Food Distribution',
+    description: 'Fresh groceries, canned goods, and household essentials for families in need.',
+    icon: 'M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z',
+  },
+  {
+    title: 'No Questions Asked',
+    description: 'We serve anyone who needs help with dignity and respect, no documentation required.',
+    icon: 'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z',
+  },
+  {
+    title: 'Delivery Available',
+    description: 'For elderly or disabled individuals who cannot travel to our location.',
+    icon: 'M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2',
+  },
+  {
+    title: 'Prayer & Support',
+    description: 'Emotional and spiritual support alongside physical needs.',
+    icon: 'M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z',
+  },
+];
+
+// How it works steps
+const howItWorks = [
+  { step: '1', title: 'Arrive During Hours', description: 'Come during our distribution hours on the 2nd and 4th Saturday of each month.' },
+  { step: '2', title: 'Simple Registration', description: 'Our volunteers will help you register. No extensive paperwork or documentation required.' },
+  { step: '3', title: 'Receive Food Package', description: 'Get a pre-packed bag of groceries tailored to your family size and dietary needs.' },
+  { step: '4', title: 'Additional Support', description: 'Connect with resources for additional assistance if needed.' },
+];
+
+// Volunteer opportunities
+const volunteerRoles = [
+  {
+    title: 'Food Sorter',
+    time: 'Friday evenings',
+    description: 'Help organize and package food donations for distribution.',
+    icon: 'M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10',
+  },
+  {
+    title: 'Distribution Volunteer',
+    time: 'Saturday mornings',
+    description: 'Assist families during food pickup and distribution.',
+    icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z',
+  },
+  {
+    title: 'Delivery Driver',
+    time: 'Flexible',
+    description: 'Deliver food packages to homebound community members.',
+    icon: 'M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2',
+  },
+  {
+    title: 'Donation Coordinator',
+    time: 'Various',
+    description: 'Help coordinate food drives and manage donation logistics.',
+    icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01',
+  },
+];
+
+// Donation needs
+const donationNeeds = [
+  'Canned vegetables and fruits',
+  'Rice, pasta, and grains',
+  'Peanut butter and protein items',
+  'Baby food and formula',
+  'Personal hygiene items',
+  'Household cleaning supplies',
+  'Fresh produce (when available)',
+  'Paper products and diapers',
+];
+
+// Testimonials
+const testimonials = [
+  {
+    quote: "When I lost my job, I didn't know how I would feed my children. The food pantry was a lifeline for our family. The volunteers were so kind and never made me feel embarrassed. It gave me hope during the darkest time.",
+    author: 'Maria',
+    role: 'Single Mother of Three',
+  },
+  {
+    quote: "The food pantry doesn't just provide groceries - they provide friendship and care. The volunteers remember my name and ask about my health. It means more than they know to feel connected to my community.",
+    author: 'Robert',
+    role: 'Senior Citizen',
+  },
+];
+---
+
+<PageLayout
+  title="Food Pantry"
+  description="NBCC Food Pantry - Serving our community with dignity, compassion, and hope. No one should go hungry. Open 2nd & 4th Saturdays."
+  heroTitle="Food Pantry"
+  heroSubtitle="Serving our community with dignity, compassion, and hope. No one should go hungry."
+  heroImage="https://images.unsplash.com/photo-1593113598332-cd288d649433?w=1920&q=80"
+>
+  <!-- Quick Info Section -->
+  <section class="py-12 bg-cream-100 border-b border-cream-200">
+    <Container>
+      <div class="grid sm:grid-cols-3 gap-6 max-w-3xl mx-auto">
+        <div class="bg-white rounded-2xl p-6 text-center shadow-soft border border-cream-200">
+          <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-primary-100 flex items-center justify-center">
+            <svg class="w-6 h-6 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <p class="text-stone-500 text-sm font-medium mb-1">Distribution Hours</p>
+          <p class="text-primary-900 font-display text-lg font-semibold">2nd & 4th Saturdays</p>
+          <p class="text-primary-900 font-display text-lg font-semibold">9:00 AM - 12:00 PM</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 text-center shadow-soft border border-cream-200">
+          <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-terra-100 flex items-center justify-center">
+            <svg class="w-6 h-6 text-terra-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+          <p class="text-stone-500 text-sm font-medium mb-1">Location</p>
+          <p class="text-primary-900 font-display text-xl font-semibold">Church Parking Lot</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 text-center shadow-soft border border-cream-200">
+          <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-sage-100 flex items-center justify-center">
+            <svg class="w-6 h-6 text-sage-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <p class="text-stone-500 text-sm font-medium mb-1">Eligibility</p>
+          <p class="text-primary-900 font-display text-xl font-semibold">Open to All in Need</p>
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+        <a href="/contact" class="btn btn-warm">
+          Volunteer Today
+        </a>
+        <a href="/giving" class="btn btn-secondary">
+          Make a Donation
+        </a>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Mission Section -->
+  <section class="py-20 lg:py-28 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-cream-50 via-white to-primary-50/30"></div>
+
+    <Container class="relative">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <!-- Content -->
+        <div>
+          <div class="inline-flex items-center gap-3 mb-6">
+            <span class="w-8 h-[1px] bg-terra-400"></span>
+            <span class="text-terra-600 text-sm font-medium tracking-widest uppercase">Our Mission</span>
+          </div>
+
+          <h2 class="text-4xl md:text-5xl font-display font-semibold text-primary-900 mb-6 leading-tight">
+            Feeding Families,<br />
+            <span class="text-terra-600 italic">Serving with Love</span>
+          </h2>
+
+          <div class="space-y-5 text-lg text-stone-600 leading-relaxed mb-8">
+            <p>
+              The NBCC Food Pantry exists to provide nutritious food and essential items to individuals and families
+              facing food insecurity in our community. We believe that everyone deserves access to basic necessities,
+              regardless of their circumstances.
+            </p>
+            <p>
+              More than just providing food, we aim to offer hope, dignity, and support to our neighbors during
+              difficult times. Our volunteers treat every person with respect and kindness, creating a welcoming
+              environment where people feel valued.
+            </p>
+          </div>
+
+          <!-- Stats -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-6">
+            {stats.map((stat) => (
+              <div class="text-center sm:text-left">
+                <p class="text-3xl md:text-4xl font-display font-bold text-primary-900">{stat.value}</p>
+                <p class="text-stone-500 text-sm">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Image -->
+        <div class="relative">
+          <div class="aspect-[4/3] rounded-2xl overflow-hidden shadow-elevated">
+            <img
+              src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&q=80"
+              alt="Volunteers distributing food to families"
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+          <!-- Decorative elements -->
+          <div class="absolute -top-4 -left-4 w-24 h-24 bg-terra-100 rounded-2xl -z-10"></div>
+          <div class="absolute -bottom-4 -right-4 w-32 h-32 bg-sage-100 rounded-full -z-10"></div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- How We Serve Section -->
+  <section class="py-20 bg-sage-50 relative overflow-hidden">
+    <Container class="relative">
+      <div class="text-center mb-16">
+        <div class="inline-flex items-center gap-3 mb-4">
+          <span class="w-8 h-[1px] bg-sage-500"></span>
+          <span class="text-sage-700 text-sm font-medium tracking-widest uppercase">How We Serve</span>
+          <span class="w-8 h-[1px] bg-sage-500"></span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-display font-semibold text-primary-900 mb-4">
+          More Than Food
+        </h2>
+        <p class="text-stone-600 text-lg max-w-2xl mx-auto">
+          Our food pantry offers comprehensive support to meet the diverse needs of our community members
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {services.map((service) => (
+          <div class="bg-white rounded-2xl p-6 shadow-soft border border-sage-200 hover:shadow-card transition-shadow">
+            <div class="w-14 h-14 rounded-2xl bg-sage-100 flex items-center justify-center mb-5">
+              <svg class="w-7 h-7 text-sage-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d={service.icon} />
+              </svg>
+            </div>
+            <h3 class="font-display text-lg font-semibold text-primary-900 mb-2">
+              {service.title}
+            </h3>
+            <p class="text-stone-600 text-sm leading-relaxed">
+              {service.description}
+            </p>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="py-20 lg:py-28 bg-stone-100 relative overflow-hidden">
+    <!-- Texture -->
+    <div class="absolute inset-0 opacity-[0.02]" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E&quot;);"></div>
+
+    <Container class="relative">
+      <div class="text-center mb-16">
+        <div class="inline-flex items-center gap-3 mb-4">
+          <span class="w-8 h-[1px] bg-terra-400"></span>
+          <span class="text-terra-600 text-sm font-medium tracking-widest uppercase">Getting Help</span>
+          <span class="w-8 h-[1px] bg-terra-400"></span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-display font-semibold text-primary-900 mb-4">
+          How It Works
+        </h2>
+        <p class="text-stone-600 text-lg max-w-2xl mx-auto">
+          Getting help from our food pantry is simple and respectful. Here's what to expect.
+        </p>
+      </div>
+
+      <div class="max-w-4xl mx-auto">
+        <div class="grid md:grid-cols-4 gap-6">
+          {howItWorks.map((item, index) => (
+            <div class="relative">
+              <!-- Connector line (desktop only) -->
+              {index < howItWorks.length - 1 && (
+                <div class="hidden md:block absolute top-6 left-[calc(50%+24px)] w-[calc(100%-48px)] h-[2px] bg-primary-200"></div>
+              )}
+
+              <div class="relative z-10 text-center">
+                <!-- Step number -->
+                <div class="w-12 h-12 mx-auto mb-4 rounded-full bg-primary-900 flex items-center justify-center shadow-lg">
+                  <span class="text-white font-display font-bold text-lg">{item.step}</span>
+                </div>
+
+                <h3 class="font-display text-lg font-semibold text-primary-900 mb-2">
+                  {item.title}
+                </h3>
+                <p class="text-stone-600 text-sm leading-relaxed">
+                  {item.description}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Volunteer Section -->
+  <section class="py-20 lg:py-28 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-cream-50 to-white"></div>
+
+    <Container class="relative">
+      <div class="text-center mb-16">
+        <div class="inline-flex items-center gap-3 mb-4">
+          <span class="w-8 h-[1px] bg-terra-400"></span>
+          <span class="text-terra-600 text-sm font-medium tracking-widest uppercase">Get Involved</span>
+          <span class="w-8 h-[1px] bg-terra-400"></span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-display font-semibold text-primary-900 mb-4">
+          Volunteer With Us
+        </h2>
+        <p class="text-stone-600 text-lg max-w-2xl mx-auto">
+          Join our amazing team of volunteers who make the food pantry possible. There are opportunities for everyone!
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        {volunteerRoles.map((role) => (
+          <div class="group bg-white rounded-2xl p-6 shadow-soft border border-cream-200 hover:shadow-card transition-all duration-300">
+            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-terra-100 to-terra-200 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+              <svg class="w-7 h-7 text-terra-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d={role.icon} />
+              </svg>
+            </div>
+
+            <h3 class="font-display text-lg font-semibold text-primary-900 mb-1">
+              {role.title}
+            </h3>
+            <p class="text-terra-600 text-sm font-medium mb-3">{role.time}</p>
+            <p class="text-stone-600 text-sm leading-relaxed">
+              {role.description}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      <div class="text-center">
+        <a href="/contact" class="btn btn-warm">
+          Sign Up to Volunteer
+        </a>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Donation Needs Section -->
+  <section class="py-20 bg-primary-950 text-white relative overflow-hidden">
+    <!-- Texture overlay -->
+    <div class="absolute inset-0 opacity-[0.03]" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E&quot;);"></div>
+
+    <Container class="relative">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <!-- Content -->
+        <div>
+          <div class="inline-flex items-center gap-3 mb-6">
+            <span class="w-8 h-[1px] bg-golden-400"></span>
+            <span class="text-golden-400 text-sm font-medium tracking-widest uppercase">Donate</span>
+          </div>
+
+          <h2 class="text-4xl md:text-5xl font-display font-semibold text-white mb-6 leading-tight">
+            Current Donation Needs
+          </h2>
+
+          <p class="text-lg text-primary-200 leading-relaxed mb-8">
+            Your donations make our ministry possible. Here are the items we need most to serve our community effectively.
+          </p>
+
+          <ul class="grid sm:grid-cols-2 gap-3 mb-10">
+            {donationNeeds.map((item) => (
+              <li class="flex items-center gap-3">
+                <div class="w-6 h-6 rounded-full bg-terra-500 flex items-center justify-center shrink-0">
+                  <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <span class="text-cream-100">{item}</span>
+              </li>
+            ))}
+          </ul>
+
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href="/contact" class="btn btn-warm">
+              Organize a Food Drive
+            </a>
+            <Button href="/giving" variant="outline" class="!bg-white/10 !text-white border-white/30 hover:!bg-white/20">
+              Make a Financial Donation
+            </Button>
+          </div>
+        </div>
+
+        <!-- Image -->
+        <div class="relative">
+          <div class="aspect-[4/3] rounded-2xl overflow-hidden shadow-elevated">
+            <img
+              src="https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?w=800&q=80"
+              alt="Food donations and supplies"
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+          <!-- Decorative element -->
+          <div class="absolute -top-4 -right-4 w-24 h-24 bg-terra-500/20 rounded-2xl -z-10"></div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="py-20 lg:py-28 bg-cream-100 relative overflow-hidden">
+    <Container class="relative">
+      <div class="text-center mb-16">
+        <div class="inline-flex items-center gap-3 mb-4">
+          <span class="w-8 h-[1px] bg-terra-400"></span>
+          <span class="text-terra-600 text-sm font-medium tracking-widest uppercase">Impact</span>
+          <span class="w-8 h-[1px] bg-terra-400"></span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-display font-semibold text-primary-900 mb-4">
+          Stories of Impact
+        </h2>
+        <p class="text-stone-600 text-lg max-w-2xl mx-auto">
+          See how your support makes a real difference in the lives of our community members
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        {testimonials.map((testimonial) => (
+          <div class="bg-white rounded-2xl p-8 shadow-soft border border-cream-200 relative">
+            <!-- Quote mark -->
+            <div class="absolute -top-4 -left-4 w-12 h-12 bg-terra-500 rounded-xl flex items-center justify-center shadow-lg">
+              <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+              </svg>
+            </div>
+
+            <blockquote class="text-stone-700 leading-relaxed mb-6 italic">
+              "{testimonial.quote}"
+            </blockquote>
+
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-full bg-gradient-to-br from-sage-500 to-sage-600 flex items-center justify-center">
+                <span class="text-white font-display font-bold">{testimonial.author[0]}</span>
+              </div>
+              <div>
+                <p class="font-semibold text-primary-900">{testimonial.author}</p>
+                <p class="text-stone-500 text-sm">{testimonial.role}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="relative py-24 overflow-hidden">
+    <div class="absolute inset-0">
+      <img
+        src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=1920&q=80"
+        alt=""
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-primary-950/90"></div>
+    </div>
+
+    <!-- Texture overlay -->
+    <div class="absolute inset-0 opacity-[0.03]" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E&quot;);"></div>
+
+    <Container class="relative z-10">
+      <div class="max-w-3xl mx-auto text-center">
+        <div class="inline-flex items-center gap-3 mb-6">
+          <span class="w-8 h-[1px] bg-golden-400"></span>
+          <span class="text-golden-400 text-sm font-medium tracking-widest uppercase">Join the Mission</span>
+          <span class="w-8 h-[1px] bg-golden-400"></span>
+        </div>
+
+        <h2 class="text-4xl md:text-5xl font-display font-semibold text-white mb-6">
+          Together We Can Make a Difference
+        </h2>
+
+        <p class="text-primary-200 text-lg mb-10 max-w-2xl mx-auto">
+          Whether you volunteer your time, donate food, or give financially, your support helps us serve
+          families in need. No one should go hungry in our community.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/contact" class="btn btn-warm">
+            Volunteer Today
+          </a>
+          <Button href="/giving" variant="outline" class="!bg-white/10 !text-white border-white/30 hover:!bg-white/20">
+            Make a Donation
+          </Button>
+        </div>
+      </div>
+    </Container>
+  </section>
+</PageLayout>

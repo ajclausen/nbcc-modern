@@ -1,0 +1,401 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import Button from '@/components/ui/Button.astro';
+
+// Age groups data
+const ageGroups = [
+  {
+    name: 'Nursery',
+    ages: '0-2 years',
+    description: 'Safe, loving care for our youngest members with experienced caregivers.',
+    features: ['Secure check-in system', 'Trained volunteers', 'Age-appropriate toys'],
+    color: 'from-pink-400 to-pink-500',
+    icon: 'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z',
+  },
+  {
+    name: 'Toddlers',
+    ages: '2-3 years',
+    description: 'Fun activities and simple Bible stories to introduce God\'s love.',
+    features: ['Interactive songs', 'Bible stories', 'Craft activities'],
+    color: 'from-orange-400 to-orange-500',
+    icon: 'M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+  },
+  {
+    name: 'Preschool',
+    ages: '3-5 years',
+    description: 'Engaging lessons that teach foundational Bible truths through play.',
+    features: ['Bible lessons', 'Music and movement', 'Creative crafts', 'Snack time'],
+    color: 'from-green-400 to-green-500',
+    icon: 'M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707',
+  },
+  {
+    name: 'Elementary',
+    ages: 'K-5th grade',
+    description: 'Age-appropriate worship and Bible study to build strong faith foundations.',
+    features: ['Worship time', 'Bible study', 'Small groups', 'Scripture memory'],
+    color: 'from-primary-500 to-primary-600',
+    icon: 'M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253',
+  },
+];
+
+// Safety features
+const safetyFeatures = [
+  {
+    title: 'Secure Check-in',
+    description: 'Electronic check-in system with matching pickup numbers for safety.',
+    icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+  },
+  {
+    title: 'Background Checked',
+    description: 'All volunteers undergo background checks and safety training.',
+    icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4',
+  },
+  {
+    title: 'Child Protection',
+    description: 'Comprehensive child protection policies and procedures in place.',
+    icon: 'M20.618 5.984A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+  },
+  {
+    title: 'Age-Appropriate',
+    description: 'Curriculum designed specifically for each age group\'s development.',
+    icon: 'M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253',
+  },
+];
+
+// Special events
+const specialEvents = [
+  {
+    title: 'Vacation Bible School',
+    subtitle: 'Annual summer program',
+    description: 'A week-long adventure where kids dive deep into God\'s Word through interactive activities, music, and memorable experiences.',
+    icon: 'M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707',
+  },
+  {
+    title: 'Family Fun Days',
+    subtitle: 'Quarterly events',
+    description: 'Special events throughout the year including fall festivals, Easter celebrations, and Christmas programs.',
+    icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z',
+  },
+  {
+    title: 'Parent Resources',
+    subtitle: 'Supporting families',
+    description: 'Resources and workshops to help parents continue faith conversations at home.',
+    icon: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4',
+  },
+];
+
+// What to expect items
+const whatToExpect = [
+  'Interactive worship and music',
+  'Age-appropriate Bible lessons',
+  'Hands-on activities and crafts',
+  'Small group interaction',
+  'Scripture memory and application',
+];
+---
+
+<PageLayout
+  title="Kids Church"
+  description="Kids Church at NBCC - Where children discover God's love through fun, safe, and engaging experiences every Sunday morning. Nursery through 5th grade."
+  heroTitle="Kids Church"
+  heroSubtitle="Where children discover God's love through fun, safe, and engaging experiences every Sunday morning"
+  heroImage="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=1920&q=80"
+>
+  <!-- Quick Info Section -->
+  <section class="py-12 bg-cream-100 border-b border-cream-200">
+    <Container>
+      <div class="grid sm:grid-cols-3 gap-6 max-w-3xl mx-auto">
+        <div class="bg-white rounded-2xl p-6 text-center shadow-soft border border-cream-200">
+          <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-primary-100 flex items-center justify-center">
+            <svg class="w-6 h-6 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <p class="text-stone-500 text-sm font-medium mb-1">When</p>
+          <p class="text-primary-900 font-display text-xl font-semibold">Sundays at 10:00 AM</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 text-center shadow-soft border border-cream-200">
+          <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-terra-100 flex items-center justify-center">
+            <svg class="w-6 h-6 text-terra-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+          <p class="text-stone-500 text-sm font-medium mb-1">Where</p>
+          <p class="text-primary-900 font-display text-xl font-semibold">Children's Wing</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 text-center shadow-soft border border-cream-200">
+          <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-sage-100 flex items-center justify-center">
+            <svg class="w-6 h-6 text-sage-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+          </div>
+          <p class="text-stone-500 text-sm font-medium mb-1">Ages</p>
+          <p class="text-primary-900 font-display text-xl font-semibold">Nursery - 5th Grade</p>
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+        <a href="/visit" class="btn btn-warm">
+          Plan Your Visit
+        </a>
+        <a href="/contact" class="btn btn-secondary">
+          Have Questions?
+        </a>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Age Groups Section -->
+  <section class="py-20 lg:py-28 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-cream-50 via-white to-primary-50/30"></div>
+
+    <Container class="relative">
+      <div class="text-center mb-16">
+        <div class="inline-flex items-center gap-3 mb-4">
+          <span class="w-8 h-[1px] bg-terra-400"></span>
+          <span class="text-terra-600 text-sm font-medium tracking-widest uppercase">Age Groups</span>
+          <span class="w-8 h-[1px] bg-terra-400"></span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-display font-semibold text-primary-900 mb-4">
+          Programs for Every Age
+        </h2>
+        <p class="text-stone-600 text-lg max-w-2xl mx-auto">
+          We provide age-appropriate programs designed to meet children where they are and help them grow in their faith
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {ageGroups.map((group, index) => (
+          <div class="group bg-white rounded-2xl overflow-hidden shadow-soft hover:shadow-card transition-all duration-300 border border-cream-200">
+            <!-- Colored header -->
+            <div class={`h-24 bg-gradient-to-br ${group.color} relative overflow-hidden`}>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <svg class="w-16 h-16 text-white/30" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1">
+                  <path stroke-linecap="round" stroke-linejoin="round" d={group.icon} />
+                </svg>
+              </div>
+              <!-- Floating badge -->
+              <div class="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-white rounded-full px-4 py-1 shadow-md border border-cream-200">
+                <span class="text-sm font-semibold text-stone-700">{group.ages}</span>
+              </div>
+            </div>
+
+            <div class="p-6 pt-8">
+              <h3 class="font-display text-xl font-semibold text-primary-900 mb-2 text-center">
+                {group.name}
+              </h3>
+              <p class="text-stone-600 text-sm text-center mb-4 leading-relaxed">
+                {group.description}
+              </p>
+
+              <ul class="space-y-2">
+                {group.features.map((feature) => (
+                  <li class="flex items-center gap-2 text-sm text-stone-600">
+                    <svg class="w-4 h-4 text-sage-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- What to Expect Section -->
+  <section class="py-20 bg-primary-950 text-white relative overflow-hidden">
+    <!-- Texture overlay -->
+    <div class="absolute inset-0 opacity-[0.03]" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E&quot;);"></div>
+
+    <Container class="relative">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <!-- Content -->
+        <div>
+          <div class="inline-flex items-center gap-3 mb-6">
+            <span class="w-8 h-[1px] bg-golden-400"></span>
+            <span class="text-golden-400 text-sm font-medium tracking-widest uppercase">What to Expect</span>
+          </div>
+
+          <h2 class="text-4xl md:text-5xl font-display font-semibold text-white mb-6 leading-tight">
+            A Sunday Morning<br />
+            <span class="text-terra-400 italic">Experience</span>
+          </h2>
+
+          <div class="space-y-5 text-lg text-primary-200 leading-relaxed mb-8">
+            <p>
+              When you arrive with your children, our friendly check-in team will help you get registered
+              and show you to the appropriate classroom. Each child receives a name tag and security number
+              for safe pickup.
+            </p>
+            <p>
+              Our Kids Church experience includes worship time with age-appropriate songs, interactive
+              Bible lessons, creative activities, and small group discussions. We focus on helping children
+              understand God's love and how to apply biblical truths to their daily lives.
+            </p>
+          </div>
+
+          <ul class="space-y-3">
+            {whatToExpect.map((item) => (
+              <li class="flex items-center gap-3">
+                <div class="w-6 h-6 rounded-full bg-terra-500 flex items-center justify-center shrink-0">
+                  <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <span class="text-cream-100">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- Image -->
+        <div class="relative">
+          <div class="aspect-[4/3] rounded-2xl overflow-hidden shadow-elevated">
+            <img
+              src="https://images.unsplash.com/photo-1544776193-352d25ca82cd?w=800&q=80"
+              alt="Children engaged in learning activities"
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+          <!-- Decorative element -->
+          <div class="absolute -top-4 -right-4 w-24 h-24 bg-terra-500/20 rounded-2xl -z-10"></div>
+          <div class="absolute -bottom-4 -left-4 w-32 h-32 bg-golden-500/10 rounded-full -z-10"></div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Safety & Security Section -->
+  <section class="py-20 lg:py-28 bg-sage-50 relative overflow-hidden">
+    <Container class="relative">
+      <div class="text-center mb-16">
+        <div class="inline-flex items-center gap-3 mb-4">
+          <span class="w-8 h-[1px] bg-sage-500"></span>
+          <span class="text-sage-700 text-sm font-medium tracking-widest uppercase">Safety & Security</span>
+          <span class="w-8 h-[1px] bg-sage-500"></span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-display font-semibold text-primary-900 mb-4">
+          Your Child's Safety First
+        </h2>
+        <p class="text-stone-600 text-lg max-w-2xl mx-auto">
+          Your child's safety is our top priority. We maintain the highest standards of security and care.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {safetyFeatures.map((feature) => (
+          <div class="bg-white rounded-2xl p-6 shadow-soft border border-sage-200 hover:shadow-card transition-shadow">
+            <div class="w-14 h-14 rounded-2xl bg-sage-100 flex items-center justify-center mb-5">
+              <svg class="w-7 h-7 text-sage-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d={feature.icon} />
+              </svg>
+            </div>
+            <h3 class="font-display text-lg font-semibold text-primary-900 mb-2">
+              {feature.title}
+            </h3>
+            <p class="text-stone-600 text-sm leading-relaxed">
+              {feature.description}
+            </p>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- Special Events Section -->
+  <section class="py-20 lg:py-28 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-cream-50 to-white"></div>
+
+    <Container class="relative">
+      <div class="text-center mb-16">
+        <div class="inline-flex items-center gap-3 mb-4">
+          <span class="w-8 h-[1px] bg-terra-400"></span>
+          <span class="text-terra-600 text-sm font-medium tracking-widest uppercase">Special Events</span>
+          <span class="w-8 h-[1px] bg-terra-400"></span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-display font-semibold text-primary-900 mb-4">
+          Beyond Sunday Morning
+        </h2>
+        <p class="text-stone-600 text-lg max-w-2xl mx-auto">
+          Throughout the year, we host special events and programs for children and families
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        {specialEvents.map((event) => (
+          <div class="group bg-white rounded-2xl p-8 shadow-soft border border-cream-200 hover:shadow-card transition-all duration-300 relative overflow-hidden">
+            <!-- Decorative corner -->
+            <div class="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-terra-100 to-transparent rounded-bl-full"></div>
+
+            <div class="relative">
+              <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-terra-100 to-terra-200 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <svg class="w-8 h-8 text-terra-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d={event.icon} />
+                </svg>
+              </div>
+
+              <h3 class="font-display text-xl font-semibold text-primary-900 mb-1">
+                {event.title}
+              </h3>
+              <p class="text-terra-600 text-sm font-medium mb-4">
+                {event.subtitle}
+              </p>
+              <p class="text-stone-600 leading-relaxed">
+                {event.description}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="relative py-24 overflow-hidden">
+    <div class="absolute inset-0">
+      <img
+        src="https://images.unsplash.com/photo-1602008033211-7e4cfd404b03?w=1920&q=80"
+        alt=""
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-primary-950/90"></div>
+    </div>
+
+    <!-- Texture overlay -->
+    <div class="absolute inset-0 opacity-[0.03]" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E&quot;);"></div>
+
+    <Container class="relative z-10">
+      <div class="max-w-3xl mx-auto text-center">
+        <div class="inline-flex items-center gap-3 mb-6">
+          <span class="w-8 h-[1px] bg-golden-400"></span>
+          <span class="text-golden-400 text-sm font-medium tracking-widest uppercase">Join Us</span>
+          <span class="w-8 h-[1px] bg-golden-400"></span>
+        </div>
+
+        <h2 class="text-4xl md:text-5xl font-display font-semibold text-white mb-6">
+          Bring Your Kids This Sunday
+        </h2>
+
+        <p class="text-primary-200 text-lg mb-10 max-w-2xl mx-auto">
+          We'd love to meet your family! Our Kids Church team is ready to welcome your children
+          and help them discover the joy of knowing Jesus.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/visit" class="btn btn-warm">
+            Plan Your Visit
+          </a>
+          <Button href="/contact" variant="outline" class="!bg-white/10 !text-white border-white/30 hover:!bg-white/20">
+            Contact Us
+          </Button>
+        </div>
+      </div>
+    </Container>
+  </section>
+</PageLayout>

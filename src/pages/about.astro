@@ -4,43 +4,77 @@ import Container from '@/components/ui/Container.astro';
 import Button from '@/components/ui/Button.astro';
 import { siteConfig } from '@/data/siteConfig';
 
+// Updated Core Values based on corrected content
 const values = [
   {
-    title: 'Faith in Christ',
-    description: 'We believe Jesus is the Son of God, our Savior, and the foundation of everything we do.',
-    icon: 'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z',
-  },
-  {
-    title: 'Biblical Teaching',
-    description: 'The Bible is our guide for faith and life. We study it together and apply its truths.',
+    title: 'Biblical Authority',
+    description: 'We believe the Bible is God\'s inspired Word and our final authority for faith and practice.',
     icon: 'M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253',
   },
   {
-    title: 'Welcoming Community',
-    description: 'Everyone is welcome here. We strive to create a place where all feel loved and valued.',
+    title: 'Grace & Truth',
+    description: 'We strive to balance God\'s amazing grace with His unchanging truth in all we do.',
+    icon: 'M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3',
+  },
+  {
+    title: 'Authentic Community',
+    description: 'We value genuine relationships where people can be real, find support, and grow together.',
     icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z',
   },
   {
-    title: 'Serving Others',
-    description: 'Following Christ means serving others. We look for ways to bless our community.',
-    icon: 'M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9',
+    title: 'Intentional Discipleship',
+    description: 'We are committed to helping every person take their next step in following Jesus.',
+    icon: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6',
   },
 ];
 
+// Updated milestones with accurate historical information
 const milestones = [
-  { year: '1856', event: 'New Brunswick Church of Christ founded by a small group of believers' },
-  { year: '1870s', event: 'First permanent church building constructed' },
-  { year: '1920s', event: 'Church survived as the town of New Brunswick faded away' },
-  { year: '1970s', event: 'Major renovation and expansion of facilities' },
-  { year: 'Today', event: 'Continuing to serve Lebanon, Indiana and the surrounding community' },
+  { year: '1856', event: 'New Brunswick Church of Christ founded by a small group of devoted believers in a humble log cabin meeting house' },
+  { year: '1870s', event: 'First permanent church building constructed as the congregation grew in faith and numbers' },
+  { year: '1920s', event: 'Church persevered as the town of New Brunswick faded, remaining a beacon of faith in Boone County' },
+  { year: '1970s', event: 'Major renovation and expansion of facilities to serve the growing Lebanon community' },
+  { year: 'Today', event: 'Continuing to make disciples of Jesus Christ who make disciples, transforming our community with God\'s love' },
+];
+
+// Leadership team
+const leadership = [
+  {
+    name: 'John Clausen',
+    role: 'Elder',
+    description: 'John has served as an elder at NBCC for over 15 years, bringing wisdom and pastoral care to our congregation.',
+    initials: 'JC',
+    color: 'from-primary-600 to-primary-800',
+  },
+  {
+    name: 'Billy Slater',
+    role: 'Worship Leader',
+    description: 'Billy leads our worship ministry with passion, helping our congregation connect with God through music.',
+    initials: 'BS',
+    color: 'from-terra-500 to-terra-700',
+  },
+  {
+    name: 'Lisa Slater',
+    role: "Children's Ministry Director",
+    description: 'Lisa oversees our thriving children\'s programs, creating a fun and safe environment for kids to learn about Jesus.',
+    initials: 'LS',
+    color: 'from-sage-500 to-sage-600',
+  },
+  {
+    name: 'Rusty',
+    role: 'Youth Minister',
+    description: 'Rusty leads our youth group with energy and dedication, mentoring the next generation of believers.',
+    initials: 'R',
+    color: 'from-golden-500 to-golden-600',
+  },
 ];
 ---
 
 <PageLayout
   title="About Us"
-  description="Learn about New Brunswick Church of Christ - a Spirit-filled, non-denominational church family serving Lebanon, Indiana since 1856."
+  description="Learn about New Brunswick Church of Christ - an independent, non-denominational church family serving Lebanon, Indiana since 1856. Discover our restoration heritage and mission to make disciples."
   heroTitle="Our Story"
-  heroSubtitle="A Spirit-filled community of faith serving Lebanon, Indiana since 1856"
+  heroSubtitle="Serving Lebanon Since 1856 — An independent, non-denominational church following the New Testament pattern"
   heroImage="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?w=1920&q=80"
 >
   <!-- History Section -->
@@ -89,19 +123,20 @@ const milestones = [
 
           <div class="space-y-5 text-lg text-stone-600 leading-relaxed">
             <p>
-              In <strong class="text-primary-800 font-semibold">1856</strong>, a small group of believers
-              gathered in the tiny town of New Brunswick, Indiana to worship together. They built a simple
-              church-house and committed themselves to following Christ and serving their community.
+              For over <strong class="text-primary-800 font-semibold">165 years</strong>, New Brunswick Church of Christ
+              has been a cornerstone of faith in the Lebanon community. Founded in <strong class="text-primary-800 font-semibold">1856</strong> by
+              a small group of devoted believers, our church has grown from a humble log cabin meeting house to a thriving
+              congregation that impacts lives throughout Boone County and beyond.
             </p>
             <p>
-              Though the town of New Brunswick no longer exists, the church has continued for over 165 years.
-              What began as a small congregation in a single room has grown into a vibrant church family
-              that continues to preach the gospel and provide community support.
+              As an <strong class="text-primary-800">independent, non-denominational church</strong>, we seek to follow the
+              New Testament pattern for the church, focusing on the essentials of faith while allowing freedom in matters
+              of opinion. Our restoration heritage calls us back to simple New Testament Christianity — no more, no less.
             </p>
             <p>
-              Today, New Brunswick Church of Christ remains committed to the same mission:
-              <strong class="text-primary-800">uplifting Christ to bring salvation to the lost</strong>.
-              We are an independent, non-denominational church rooted in the Restoration Movement.
+              Today, we continue the mission our founders began: <strong class="text-primary-800">making disciples of Jesus Christ
+              who make disciples</strong>. Through vibrant worship, practical teaching, authentic community, and compassionate
+              service, we're seeing lives transformed by the power of the Gospel.
             </p>
           </div>
         </div>
@@ -109,7 +144,7 @@ const milestones = [
     </Container>
   </section>
 
-  <!-- Mission Section -->
+  <!-- Mission & Vision Section -->
   <section class="py-20 bg-primary-950 text-white relative overflow-hidden">
     <!-- Texture overlay -->
     <div class="absolute inset-0 opacity-[0.03]" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E&quot;);"></div>
@@ -119,26 +154,46 @@ const milestones = [
     <div class="absolute bottom-0 left-0 w-64 h-64 bg-primary-700/20 rounded-full blur-3xl pointer-events-none"></div>
 
     <Container class="relative">
-      <div class="max-w-4xl mx-auto text-center">
-        <div class="inline-flex items-center gap-3 mb-6">
-          <span class="w-8 h-[1px] bg-golden-400"></span>
-          <span class="text-golden-400 text-sm font-medium tracking-widest uppercase">Our Mission</span>
-          <span class="w-8 h-[1px] bg-golden-400"></span>
+      <div class="grid lg:grid-cols-2 gap-16 lg:gap-24">
+        <!-- Mission -->
+        <div class="text-center lg:text-left">
+          <div class="inline-flex items-center gap-3 mb-6">
+            <span class="w-8 h-[1px] bg-golden-400"></span>
+            <span class="text-golden-400 text-sm font-medium tracking-widest uppercase">Our Mission</span>
+            <span class="w-8 h-[1px] bg-golden-400 lg:hidden"></span>
+          </div>
+
+          <blockquote class="relative mb-6">
+            <div class="absolute -top-4 -left-2 text-6xl font-display text-primary-700/30 leading-none hidden lg:block">"</div>
+            <p class="text-2xl md:text-3xl font-display text-cream-100 italic leading-snug relative z-10 lg:pl-6">
+              To make disciples of Jesus Christ who make disciples, transforming our community and world with God's love.
+            </p>
+          </blockquote>
+
+          <p class="text-primary-200 lg:pl-6">
+            Everything we do flows from this mission — worship, teaching, fellowship, and service all point to Jesus.
+          </p>
         </div>
 
-        <blockquote class="relative mb-10">
-          <div class="absolute -top-4 -left-4 text-8xl font-display text-primary-700/30 leading-none">"</div>
-          <p class="text-3xl md:text-4xl lg:text-5xl font-display text-cream-100 italic leading-tight relative z-10 px-8">
-            {siteConfig.tagline}
-          </p>
-          <div class="absolute -bottom-8 -right-4 text-8xl font-display text-primary-700/30 leading-none rotate-180">"</div>
-        </blockquote>
+        <!-- Vision -->
+        <div class="text-center lg:text-left">
+          <div class="inline-flex items-center gap-3 mb-6">
+            <span class="w-8 h-[1px] bg-terra-400"></span>
+            <span class="text-terra-400 text-sm font-medium tracking-widest uppercase">Our Vision</span>
+            <span class="w-8 h-[1px] bg-terra-400 lg:hidden"></span>
+          </div>
 
-        <p class="text-lg text-primary-200 max-w-2xl mx-auto">
-          Everything we do flows from this mission. Whether we're gathering for worship,
-          studying the Bible, serving our neighbors, or simply sharing a meal together,
-          our goal is to point people to Jesus and His love for all.
-        </p>
+          <blockquote class="relative mb-6">
+            <div class="absolute -top-4 -left-2 text-6xl font-display text-primary-700/30 leading-none hidden lg:block">"</div>
+            <p class="text-2xl md:text-3xl font-display text-cream-100 italic leading-snug relative z-10 lg:pl-6">
+              To be a church where people far from God are welcomed home, find hope in Jesus, and grow into fully devoted followers of Christ.
+            </p>
+          </blockquote>
+
+          <p class="text-primary-200 lg:pl-6">
+            We dream of a community transformed — lives changed, families restored, and hope renewed through the Gospel.
+          </p>
+        </div>
       </div>
     </Container>
   </section>
@@ -228,10 +283,10 @@ const milestones = [
           <span class="w-8 h-[1px] bg-terra-400"></span>
         </div>
         <h2 class="text-4xl md:text-5xl font-display font-semibold text-primary-900 mb-4">
-          What We Value
+          Our Core Values
         </h2>
         <p class="text-stone-600 text-lg max-w-2xl mx-auto">
-          The principles that guide our church family
+          These values shape who we are and guide everything we do as a church family
         </p>
       </div>
 
@@ -254,6 +309,59 @@ const milestones = [
             </h3>
             <p class="text-stone-600 text-center leading-relaxed">
               {value.description}
+            </p>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- Leadership Section -->
+  <section class="py-20 lg:py-28 bg-cream-100 relative overflow-hidden">
+    <!-- Decorative elements -->
+    <div class="absolute top-0 left-0 w-96 h-96 bg-primary-100/50 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+    <div class="absolute bottom-0 right-0 w-64 h-64 bg-terra-100/50 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
+
+    <Container class="relative">
+      <div class="text-center mb-16">
+        <div class="inline-flex items-center gap-3 mb-4">
+          <span class="w-8 h-[1px] bg-terra-400"></span>
+          <span class="text-terra-600 text-sm font-medium tracking-widest uppercase">Our Team</span>
+          <span class="w-8 h-[1px] bg-terra-400"></span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-display font-semibold text-primary-900 mb-4">
+          Our Leadership
+        </h2>
+        <p class="text-stone-600 text-lg max-w-2xl mx-auto">
+          Meet the dedicated servants who help guide and shepherd our church family
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        {leadership.map((leader) => (
+          <div class="group text-center">
+            <!-- Avatar -->
+            <div class="relative mx-auto mb-6 w-32 h-32">
+              <div class={`w-full h-full rounded-2xl bg-gradient-to-br ${leader.color} flex items-center justify-center shadow-card group-hover:shadow-elevated transition-shadow duration-300 group-hover:scale-105 transform transition-transform`}>
+                <span class="text-white font-display text-4xl font-bold">{leader.initials}</span>
+              </div>
+              <!-- Decorative ring -->
+              <div class="absolute inset-0 rounded-2xl border-2 border-terra-300/50 scale-110 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            </div>
+
+            <!-- Name -->
+            <h3 class="font-display text-xl font-semibold text-primary-900 mb-1">
+              {leader.name}
+            </h3>
+
+            <!-- Role badge -->
+            <span class="inline-block px-3 py-1 bg-terra-100 text-terra-700 rounded-full text-sm font-medium mb-4">
+              {leader.role}
+            </span>
+
+            <!-- Description -->
+            <p class="text-stone-600 text-sm leading-relaxed">
+              {leader.description}
             </p>
           </div>
         ))}

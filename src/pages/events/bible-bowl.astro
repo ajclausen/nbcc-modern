@@ -1,0 +1,502 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import Button from '@/components/ui/Button.astro';
+
+// Stats
+const stats = [
+  { value: '15+', label: 'Years Running' },
+  { value: '50+', label: 'Students Served' },
+];
+
+// Age groups and study books
+const ageGroups = [
+  {
+    name: 'Junior Bible Bowl',
+    ages: '3rd - 6th Grade',
+    description: 'Introduction to competitive Bible study with age-appropriate questions and fun activities.',
+    studyBook: 'Gospel of Mark',
+    meetingTime: 'Sundays 4:00-5:00 PM',
+    color: 'from-green-400 to-green-500',
+  },
+  {
+    name: 'Middle School',
+    ages: '7th - 8th Grade',
+    description: 'Building Bible knowledge and study skills through engaging competition format.',
+    studyBook: 'Book of Acts',
+    meetingTime: 'Sundays 5:00-6:00 PM',
+    color: 'from-primary-500 to-primary-600',
+  },
+  {
+    name: 'High School',
+    ages: '9th - 12th Grade',
+    description: 'Advanced Bible study with challenging questions and leadership opportunities.',
+    studyBook: 'Romans & Galatians',
+    meetingTime: 'Sundays 5:00-6:00 PM',
+    color: 'from-terra-500 to-terra-600',
+  },
+];
+
+// Benefits
+const benefits = [
+  {
+    title: 'Deep Bible Study',
+    description: 'Students develop a thorough understanding of Scripture through systematic study.',
+    icon: 'M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253',
+  },
+  {
+    title: 'Focus & Memory',
+    description: 'Improves concentration and memory skills through Scripture memorization.',
+    icon: 'M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z',
+  },
+  {
+    title: 'Team Building',
+    description: 'Builds friendships and teamwork while studying God\'s Word together.',
+    icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z',
+  },
+  {
+    title: 'Healthy Competition',
+    description: 'Friendly competition that motivates deeper learning and engagement.',
+    icon: 'M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z',
+  },
+  {
+    title: 'Recognition',
+    description: 'Opportunities to represent our church at regional and national competitions.',
+    icon: 'M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z',
+  },
+];
+
+// Study methods
+const studyMethods = [
+  'Interactive group discussions',
+  'Memory verse competitions',
+  'Practice question sessions',
+  'Study guides and worksheets',
+  'Team-building activities',
+  'Scripture application exercises',
+];
+
+// Competition schedule
+const competitionSchedule = [
+  { phase: 'Practice Season', dates: 'September - December', description: 'Weekly practice sessions focused on learning the study material and developing team skills.' },
+  { phase: 'Regional Competition', dates: 'January', description: 'Compete against other churches in our region. Top teams advance to nationals.' },
+  { phase: 'National Tournament', dates: 'July', description: 'The ultimate Bible Bowl experience with teams from across the country.' },
+];
+
+// Testimonials
+const testimonials = [
+  {
+    quote: "Bible Bowl changed my life. Through Bible Bowl, I learned to love God's Word in a way I never had before. The friendships I made and the Scripture I memorized have stayed with me through college and beyond. It gave me a foundation that I still rely on today.",
+    author: 'Sarah M.',
+    role: 'Former High School Participant',
+  },
+  {
+    quote: "I thought the Bible was boring before I joined Bible Bowl. Now I see how exciting and relevant it really is. Our team has become like family, and I actually look forward to Sunday practices!",
+    author: 'David T.',
+    role: 'Current High School Student',
+  },
+];
+---
+
+<PageLayout
+  title="Bible Bowl"
+  description="Bible Bowl at NBCC - Where competitive spirit meets Scripture study. Making God's Word exciting through friendly competition for 3rd-12th graders."
+  heroTitle="Bible Bowl"
+  heroSubtitle="Where competitive spirit meets Scripture study. Making God's Word exciting through friendly competition."
+  heroImage="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=1920&q=80"
+>
+  <!-- Quick Info Section -->
+  <section class="py-12 bg-cream-100 border-b border-cream-200">
+    <Container>
+      <div class="grid sm:grid-cols-3 gap-6 max-w-3xl mx-auto">
+        <div class="bg-white rounded-2xl p-6 text-center shadow-soft border border-cream-200">
+          <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-primary-100 flex items-center justify-center">
+            <svg class="w-6 h-6 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <p class="text-stone-500 text-sm font-medium mb-1">When</p>
+          <p class="text-primary-900 font-display text-xl font-semibold">Sundays at 5:00 PM</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 text-center shadow-soft border border-cream-200">
+          <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-terra-100 flex items-center justify-center">
+            <svg class="w-6 h-6 text-terra-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+          <p class="text-stone-500 text-sm font-medium mb-1">Where</p>
+          <p class="text-primary-900 font-display text-xl font-semibold">Fellowship Hall</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 text-center shadow-soft border border-cream-200">
+          <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-sage-100 flex items-center justify-center">
+            <svg class="w-6 h-6 text-sage-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+          </div>
+          <p class="text-stone-500 text-sm font-medium mb-1">Ages</p>
+          <p class="text-primary-900 font-display text-xl font-semibold">3rd - 12th Grade</p>
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+        <a href="/contact" class="btn btn-warm">
+          Join a Team
+        </a>
+        <a href="/events" class="btn btn-secondary">
+          Learn More
+        </a>
+      </div>
+    </Container>
+  </section>
+
+  <!-- What is Bible Bowl Section -->
+  <section class="py-20 lg:py-28 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-cream-50 via-white to-primary-50/30"></div>
+
+    <Container class="relative">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <!-- Content -->
+        <div>
+          <div class="inline-flex items-center gap-3 mb-6">
+            <span class="w-8 h-[1px] bg-terra-400"></span>
+            <span class="text-terra-600 text-sm font-medium tracking-widest uppercase">What is Bible Bowl?</span>
+          </div>
+
+          <h2 class="text-4xl md:text-5xl font-display font-semibold text-primary-900 mb-6 leading-tight">
+            Scripture Study<br />
+            <span class="text-terra-600 italic">Meets Competition</span>
+          </h2>
+
+          <div class="space-y-5 text-lg text-stone-600 leading-relaxed mb-8">
+            <p>
+              Bible Bowl is a competitive Scripture study program that combines the excitement of team competition
+              with deep Bible learning. Students study specific books of the Bible throughout the year, then compete
+              in quiz-style competitions against other churches.
+            </p>
+            <p>
+              It's like academic trivia, but focused entirely on God's Word. Teams work together to answer questions
+              about Bible content, characters, themes, and applications. The program helps students develop a love
+              for Scripture while building lasting friendships.
+            </p>
+          </div>
+
+          <!-- Stats -->
+          <div class="flex gap-8">
+            {stats.map((stat) => (
+              <div>
+                <p class="text-4xl font-display font-bold text-primary-900">{stat.value}</p>
+                <p class="text-stone-500 text-sm">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Image -->
+        <div class="relative">
+          <div class="aspect-[4/3] rounded-2xl overflow-hidden shadow-elevated">
+            <img
+              src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=800&q=80"
+              alt="Students studying the Bible together"
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+          <!-- Decorative elements -->
+          <div class="absolute -top-4 -left-4 w-24 h-24 bg-terra-100 rounded-2xl -z-10"></div>
+          <div class="absolute -bottom-4 -right-4 w-32 h-32 bg-primary-100 rounded-full -z-10"></div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Age Groups Section -->
+  <section class="py-20 bg-stone-100 relative overflow-hidden">
+    <!-- Texture -->
+    <div class="absolute inset-0 opacity-[0.02]" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E&quot;);"></div>
+
+    <Container class="relative">
+      <div class="text-center mb-16">
+        <div class="inline-flex items-center gap-3 mb-4">
+          <span class="w-8 h-[1px] bg-terra-400"></span>
+          <span class="text-terra-600 text-sm font-medium tracking-widest uppercase">Age Groups</span>
+          <span class="w-8 h-[1px] bg-terra-400"></span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-display font-semibold text-primary-900 mb-4">
+          Age Groups & Study Books
+        </h2>
+        <p class="text-stone-600 text-lg max-w-2xl mx-auto">
+          Each age group studies age-appropriate portions of Scripture with questions tailored to their development level
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        {ageGroups.map((group) => (
+          <div class="bg-white rounded-2xl overflow-hidden shadow-soft border border-cream-200 hover:shadow-card transition-shadow">
+            <!-- Colored header -->
+            <div class={`h-4 bg-gradient-to-r ${group.color}`}></div>
+
+            <div class="p-6">
+              <h3 class="font-display text-xl font-semibold text-primary-900 mb-1">
+                {group.name}
+              </h3>
+              <p class="text-terra-600 text-sm font-medium mb-4">{group.ages}</p>
+
+              <p class="text-stone-600 text-sm leading-relaxed mb-6">
+                {group.description}
+              </p>
+
+              <div class="space-y-3 pt-4 border-t border-cream-200">
+                <div class="flex items-center justify-between">
+                  <span class="text-stone-500 text-sm">Current Study Book:</span>
+                  <span class="font-semibold text-primary-900">{group.studyBook}</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-stone-500 text-sm">Meeting Time:</span>
+                  <span class="font-semibold text-primary-900 text-sm">{group.meetingTime}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- Why Bible Bowl Section -->
+  <section class="py-20 lg:py-28 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-cream-50 to-white"></div>
+
+    <Container class="relative">
+      <div class="text-center mb-16">
+        <div class="inline-flex items-center gap-3 mb-4">
+          <span class="w-8 h-[1px] bg-terra-400"></span>
+          <span class="text-terra-600 text-sm font-medium tracking-widest uppercase">Benefits</span>
+          <span class="w-8 h-[1px] bg-terra-400"></span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-display font-semibold text-primary-900 mb-4">
+          Why Bible Bowl?
+        </h2>
+        <p class="text-stone-600 text-lg max-w-2xl mx-auto">
+          Bible Bowl offers unique benefits that go beyond traditional Bible study, helping students grow in faith and life skills
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        {benefits.map((benefit, index) => (
+          <div class="group bg-white rounded-2xl p-6 shadow-soft border border-cream-200 hover:shadow-card transition-all duration-300 relative overflow-hidden">
+            <!-- Number badge -->
+            <div class="absolute -top-3 -left-3 w-10 h-10 bg-terra-500 rounded-lg flex items-center justify-center font-display font-bold text-white shadow-md">
+              {index + 1}
+            </div>
+
+            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary-100 to-primary-200 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+              <svg class="w-7 h-7 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d={benefit.icon} />
+              </svg>
+            </div>
+
+            <h3 class="font-display text-lg font-semibold text-primary-900 mb-2">
+              {benefit.title}
+            </h3>
+            <p class="text-stone-600 text-sm leading-relaxed">
+              {benefit.description}
+            </p>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- How We Study Section -->
+  <section class="py-20 bg-primary-950 text-white relative overflow-hidden">
+    <!-- Texture overlay -->
+    <div class="absolute inset-0 opacity-[0.03]" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E&quot;);"></div>
+
+    <Container class="relative">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <!-- Image -->
+        <div class="relative order-2 lg:order-1">
+          <div class="aspect-[4/3] rounded-2xl overflow-hidden shadow-elevated">
+            <img
+              src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80"
+              alt="Group Bible study session"
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+          <!-- Decorative element -->
+          <div class="absolute -top-4 -right-4 w-24 h-24 bg-terra-500/20 rounded-2xl -z-10"></div>
+        </div>
+
+        <!-- Content -->
+        <div class="order-1 lg:order-2">
+          <div class="inline-flex items-center gap-3 mb-6">
+            <span class="w-8 h-[1px] bg-golden-400"></span>
+            <span class="text-golden-400 text-sm font-medium tracking-widest uppercase">Our Approach</span>
+          </div>
+
+          <h2 class="text-4xl md:text-5xl font-display font-semibold text-white mb-6 leading-tight">
+            How We Study
+          </h2>
+
+          <p class="text-lg text-primary-200 leading-relaxed mb-8">
+            Our Bible Bowl program uses engaging, interactive methods to help students absorb and retain Scripture.
+            We believe learning God's Word should be both challenging and enjoyable.
+          </p>
+
+          <ul class="grid sm:grid-cols-2 gap-3">
+            {studyMethods.map((method) => (
+              <li class="flex items-center gap-3">
+                <div class="w-6 h-6 rounded-full bg-terra-500 flex items-center justify-center shrink-0">
+                  <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <span class="text-cream-100">{method}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Competition Schedule Section -->
+  <section class="py-20 lg:py-28 bg-stone-100 relative overflow-hidden">
+    <Container class="relative">
+      <div class="text-center mb-16">
+        <div class="inline-flex items-center gap-3 mb-4">
+          <span class="w-8 h-[1px] bg-terra-400"></span>
+          <span class="text-terra-600 text-sm font-medium tracking-widest uppercase">The Season</span>
+          <span class="w-8 h-[1px] bg-terra-400"></span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-display font-semibold text-primary-900 mb-4">
+          Competition Schedule
+        </h2>
+        <p class="text-stone-600 text-lg max-w-2xl mx-auto">
+          Our Bible Bowl year is structured around three main phases, each building toward the ultimate goal of national competition
+        </p>
+      </div>
+
+      <div class="max-w-4xl mx-auto">
+        <div class="relative">
+          <!-- Horizontal line (desktop) -->
+          <div class="hidden md:block absolute top-16 left-0 right-0 h-[2px] bg-primary-200"></div>
+
+          <div class="grid md:grid-cols-3 gap-8">
+            {competitionSchedule.map((phase, index) => (
+              <div class="relative">
+                <!-- Step number -->
+                <div class="relative z-10 w-12 h-12 mx-auto mb-6 rounded-full bg-primary-900 flex items-center justify-center shadow-lg">
+                  <span class="text-white font-display font-bold">{index + 1}</span>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 shadow-soft border border-cream-200 text-center">
+                  <h3 class="font-display text-xl font-semibold text-primary-900 mb-1">
+                    {phase.phase}
+                  </h3>
+                  <p class="text-terra-600 text-sm font-medium mb-4">{phase.dates}</p>
+                  <p class="text-stone-600 text-sm leading-relaxed">
+                    {phase.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="py-20 lg:py-28 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-cream-50 to-white"></div>
+
+    <Container class="relative">
+      <div class="text-center mb-16">
+        <div class="inline-flex items-center gap-3 mb-4">
+          <span class="w-8 h-[1px] bg-terra-400"></span>
+          <span class="text-terra-600 text-sm font-medium tracking-widest uppercase">Stories</span>
+          <span class="w-8 h-[1px] bg-terra-400"></span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-display font-semibold text-primary-900 mb-4">
+          Student Success Stories
+        </h2>
+        <p class="text-stone-600 text-lg max-w-2xl mx-auto">
+          See how Bible Bowl has impacted the lives of our students over the years
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        {testimonials.map((testimonial) => (
+          <div class="bg-white rounded-2xl p-8 shadow-soft border border-cream-200 relative">
+            <!-- Quote mark -->
+            <div class="absolute -top-4 -left-4 w-12 h-12 bg-terra-500 rounded-xl flex items-center justify-center shadow-lg">
+              <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+              </svg>
+            </div>
+
+            <blockquote class="text-stone-700 leading-relaxed mb-6 italic">
+              "{testimonial.quote}"
+            </blockquote>
+
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary-600 to-primary-800 flex items-center justify-center">
+                <span class="text-white font-display font-bold">{testimonial.author[0]}</span>
+              </div>
+              <div>
+                <p class="font-semibold text-primary-900">{testimonial.author}</p>
+                <p class="text-stone-500 text-sm">{testimonial.role}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="relative py-24 overflow-hidden">
+    <div class="absolute inset-0">
+      <img
+        src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1920&q=80"
+        alt=""
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-primary-950/90"></div>
+    </div>
+
+    <!-- Texture overlay -->
+    <div class="absolute inset-0 opacity-[0.03]" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E&quot;);"></div>
+
+    <Container class="relative z-10">
+      <div class="max-w-3xl mx-auto text-center">
+        <div class="inline-flex items-center gap-3 mb-6">
+          <span class="w-8 h-[1px] bg-golden-400"></span>
+          <span class="text-golden-400 text-sm font-medium tracking-widest uppercase">Join Us</span>
+          <span class="w-8 h-[1px] bg-golden-400"></span>
+        </div>
+
+        <h2 class="text-4xl md:text-5xl font-display font-semibold text-white mb-6">
+          Ready to Join a Team?
+        </h2>
+
+        <p class="text-primary-200 text-lg mb-10 max-w-2xl mx-auto">
+          Whether you're competitive by nature or just want to learn more about the Bible, Bible Bowl
+          has a place for you. Join us and discover the excitement of diving deep into God's Word!
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/contact" class="btn btn-warm">
+            Join a Team
+          </a>
+          <Button href="/events" variant="outline" class="!bg-white/10 !text-white border-white/30 hover:!bg-white/20">
+            Learn More
+          </Button>
+        </div>
+      </div>
+    </Container>
+  </section>
+</PageLayout>

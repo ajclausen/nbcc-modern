@@ -4,6 +4,12 @@ import { mainNavigation, getActiveNavItem } from '@/data/navigation';
 import Icon from '@/components/ui/Icon.astro';
 
 const currentPath = getActiveNavItem(Astro.url.pathname);
+
+// Check if current path is within a nav item's children
+const isChildActive = (item: typeof mainNavigation[0]) => {
+  if (!item.children) return false;
+  return item.children.some(child => currentPath === child.href || currentPath.startsWith(child.href + '/'));
+};
 ---
 
 <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="main-header">
@@ -31,6 +37,48 @@ const currentPath = getActiveNavItem(Astro.url.pathname);
               >
                 {item.label}
               </a>
+            ) : item.children ? (
+              <!-- Dropdown Nav Item -->
+              <div class="relative group">
+                <a
+                  href={item.href}
+                  class:list={[
+                    'px-4 py-2 text-sm font-medium transition-colors relative inline-flex items-center gap-1',
+                    currentPath === item.href || isChildActive(item)
+                      ? 'text-primary-700'
+                      : 'text-stone-600 hover:text-primary-700',
+                  ]}
+                  aria-current={currentPath === item.href ? 'page' : undefined}
+                >
+                  {item.label}
+                  <svg class="w-3.5 h-3.5 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
+                  {(currentPath === item.href || isChildActive(item)) && (
+                    <span class="absolute bottom-0 left-4 right-4 h-0.5 bg-terra-400 rounded-full"></span>
+                  )}
+                </a>
+
+                <!-- Dropdown Menu -->
+                <div class="dropdown-menu absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                  <div class="bg-cream-50 rounded-xl shadow-card border border-cream-200 py-2 min-w-[200px] overflow-hidden">
+                    {item.children.map((child) => (
+                      <a
+                        href={child.href}
+                        class:list={[
+                          'block px-4 py-2.5 text-sm font-medium transition-colors',
+                          currentPath === child.href
+                            ? 'text-primary-700 bg-primary-50'
+                            : 'text-stone-600 hover:text-primary-700 hover:bg-cream-100',
+                        ]}
+                        aria-current={currentPath === child.href ? 'page' : undefined}
+                      >
+                        {child.label}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
             ) : (
               <a
                 href={item.href}
@@ -76,19 +124,57 @@ const currentPath = getActiveNavItem(Astro.url.pathname);
     <div class="container-default py-8">
       <div class="flex flex-col gap-1">
         {mainNavigation.map((item) => (
-          <a
-            href={item.href}
-            class:list={[
-              'px-4 py-3.5 text-lg font-medium rounded-xl transition-all',
-              currentPath === item.href
-                ? 'text-primary-700 bg-primary-100'
-                : 'text-stone-700 hover:text-primary-700 hover:bg-stone-100',
-              item.highlight && 'bg-terra-500 text-white hover:bg-terra-600 hover:text-white mt-4',
-            ]}
-            aria-current={currentPath === item.href ? 'page' : undefined}
-          >
-            {item.label}
-          </a>
+          item.children ? (
+            <!-- Mobile Dropdown -->
+            <div class="mobile-dropdown">
+              <button
+                type="button"
+                class:list={[
+                  'w-full flex items-center justify-between px-4 py-3.5 text-lg font-medium rounded-xl transition-all mobile-dropdown-trigger',
+                  currentPath === item.href || isChildActive(item)
+                    ? 'text-primary-700 bg-primary-100'
+                    : 'text-stone-700 hover:text-primary-700 hover:bg-stone-100',
+                ]}
+                aria-expanded="false"
+              >
+                <span>{item.label}</span>
+                <svg class="w-5 h-5 transition-transform mobile-dropdown-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+
+              <div class="mobile-dropdown-content hidden pl-4 mt-1 space-y-1">
+                {item.children.map((child) => (
+                  <a
+                    href={child.href}
+                    class:list={[
+                      'block px-4 py-2.5 text-base font-medium rounded-lg transition-colors',
+                      currentPath === child.href
+                        ? 'text-primary-700 bg-primary-50'
+                        : 'text-stone-600 hover:text-primary-700 hover:bg-stone-100',
+                    ]}
+                    aria-current={currentPath === child.href ? 'page' : undefined}
+                  >
+                    {child.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <a
+              href={item.href}
+              class:list={[
+                'px-4 py-3.5 text-lg font-medium rounded-xl transition-all',
+                currentPath === item.href
+                  ? 'text-primary-700 bg-primary-100'
+                  : 'text-stone-700 hover:text-primary-700 hover:bg-stone-100',
+                item.highlight && 'bg-terra-500 text-white hover:bg-terra-600 hover:text-white mt-4',
+              ]}
+              aria-current={currentPath === item.href ? 'page' : undefined}
+            >
+              {item.label}
+            </a>
+          )
         ))}
       </div>
 
@@ -145,6 +231,24 @@ const currentPath = getActiveNavItem(Astro.url.pathname);
     background: rgba(254, 253, 251, 0.98);
     box-shadow: 0 4px 20px -4px rgba(30, 52, 72, 0.08);
   }
+
+  /* Dropdown menu animation */
+  .dropdown-menu {
+    transform: translateY(-8px);
+  }
+
+  .group:hover .dropdown-menu {
+    transform: translateY(0);
+  }
+
+  /* Mobile dropdown expanded state */
+  .mobile-dropdown-expanded .mobile-dropdown-icon {
+    transform: rotate(180deg);
+  }
+
+  .mobile-dropdown-expanded .mobile-dropdown-content {
+    display: block;
+  }
 </style>
 
 <script>
@@ -198,6 +302,18 @@ const currentPath = getActiveNavItem(Astro.url.pathname);
     }
   });
 
+  // Mobile dropdown toggles
+  const mobileDropdowns = document.querySelectorAll('.mobile-dropdown');
+  mobileDropdowns.forEach((dropdown) => {
+    const trigger = dropdown.querySelector('.mobile-dropdown-trigger');
+    trigger?.addEventListener('click', () => {
+      dropdown.classList.toggle('mobile-dropdown-expanded');
+      const isExpanded = dropdown.classList.contains('mobile-dropdown-expanded');
+      trigger.setAttribute('aria-expanded', isExpanded.toString());
+    });
+  });
+
+  // Close mobile menu when clicking on links (except dropdown triggers)
   mobileMenu?.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', () => {
       if (isOpen) toggleMenu();

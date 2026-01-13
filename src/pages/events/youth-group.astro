@@ -1,0 +1,440 @@
+---
+import PageLayout from '@/layouts/PageLayout.astro';
+import Container from '@/components/ui/Container.astro';
+import Button from '@/components/ui/Button.astro';
+
+// What we do activities
+const activities = [
+  {
+    title: 'Worship Night',
+    subtitle: 'Every Wednesday',
+    description: 'Contemporary worship with live music, focusing on connecting with God through song and prayer.',
+    icon: 'M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3',
+    color: 'from-primary-500 to-primary-600',
+  },
+  {
+    title: 'Game Nights',
+    subtitle: 'Monthly',
+    description: 'Fun fellowship through video games, board games, and outdoor activities.',
+    icon: 'M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+    color: 'from-terra-500 to-terra-600',
+  },
+  {
+    title: 'Service Projects',
+    subtitle: 'Quarterly',
+    description: 'Hands-on opportunities to serve our community and make a real difference.',
+    icon: 'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z',
+    color: 'from-sage-500 to-sage-600',
+  },
+  {
+    title: 'Competitions',
+    subtitle: 'Seasonal',
+    description: 'Bible Bowl, talent shows, and friendly competitions that build community.',
+    icon: 'M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z',
+    color: 'from-golden-500 to-golden-600',
+  },
+];
+
+// Wednesday night schedule
+const schedule = [
+  { time: '7:00-7:15 PM', title: 'Hang Out Time', description: 'Games, snacks, and catching up with friends as everyone arrives.' },
+  { time: '7:15-7:35 PM', title: 'Worship', description: 'Contemporary worship music led by our student worship team.' },
+  { time: '7:35-8:00 PM', title: 'Teaching', description: 'Relevant Bible teaching that speaks to real teen issues and questions.' },
+  { time: '8:00-8:30 PM', title: 'Small Groups', description: 'Age and gender-specific groups for deeper discussion and connection.' },
+];
+
+// Small groups
+const smallGroups = [
+  {
+    name: 'Middle School Guys',
+    leader: 'Pastor Mike',
+    description: 'Building character and friendships through sports and games',
+    color: 'from-primary-600 to-primary-800',
+    initials: 'MS',
+  },
+  {
+    name: 'Middle School Girls',
+    leader: 'Sarah Johnson',
+    description: 'Growing in confidence and faith through creative activities',
+    color: 'from-pink-500 to-pink-600',
+    initials: 'MS',
+  },
+  {
+    name: 'High School Guys',
+    leader: 'David Williams',
+    description: 'Leadership development and real-world faith application',
+    color: 'from-terra-600 to-terra-700',
+    initials: 'HS',
+  },
+  {
+    name: 'High School Girls',
+    leader: 'Lisa Martinez',
+    description: 'Identity in Christ and preparing for the future',
+    color: 'from-purple-500 to-purple-600',
+    initials: 'HS',
+  },
+];
+
+// Upcoming events
+const upcomingEvents = [
+  { title: 'Winter Retreat', date: 'January 12-14, 2024', location: 'Camp Adventure', description: 'A weekend of fun, fellowship, and spiritual growth in the mountains.' },
+  { title: 'Service Saturday', date: 'February 3, 2024', location: 'Local Community', description: 'Join us for a day of serving our neighbors through various community projects.' },
+  { title: 'Movie Night', date: 'February 17, 2024', location: 'Youth Room', description: 'Pizza, popcorn, and a great movie with discussion about faith themes.' },
+];
+
+// Team members
+const team = [
+  {
+    name: 'Rusty',
+    role: 'Youth Minister',
+    description: 'Rusty leads our youth group with energy and dedication, mentoring the next generation of believers.',
+    initials: 'R',
+    color: 'from-golden-500 to-golden-600',
+  },
+  {
+    name: 'Sarah Johnson',
+    role: 'Small Group Leader',
+    description: 'Sarah has been working with teens for over 5 years and loves helping them discover their identity in Christ.',
+    initials: 'SJ',
+    color: 'from-pink-500 to-pink-600',
+  },
+  {
+    name: 'Mike Rodriguez',
+    role: 'Volunteer Leader',
+    description: 'Mike brings his love for sports and games to youth group, connecting with students through shared interests.',
+    initials: 'MR',
+    color: 'from-primary-600 to-primary-800',
+  },
+];
+---
+
+<PageLayout
+  title="Youth Group"
+  description="Youth Group at NBCC - A place where middle and high school students connect, grow in faith, and have an amazing time together. Wednesdays at 7 PM."
+  heroTitle="Youth Group"
+  heroSubtitle="A place where middle and high school students connect, grow in faith, and have an amazing time together"
+  heroImage="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1920&q=80"
+>
+  <!-- Quick Info Section -->
+  <section class="py-12 bg-cream-100 border-b border-cream-200">
+    <Container>
+      <div class="grid sm:grid-cols-3 gap-6 max-w-3xl mx-auto">
+        <div class="bg-white rounded-2xl p-6 text-center shadow-soft border border-cream-200">
+          <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-primary-100 flex items-center justify-center">
+            <svg class="w-6 h-6 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <p class="text-stone-500 text-sm font-medium mb-1">When</p>
+          <p class="text-primary-900 font-display text-xl font-semibold">Wednesdays at 7:00 PM</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 text-center shadow-soft border border-cream-200">
+          <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-terra-100 flex items-center justify-center">
+            <svg class="w-6 h-6 text-terra-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+          <p class="text-stone-500 text-sm font-medium mb-1">Where</p>
+          <p class="text-primary-900 font-display text-xl font-semibold">Youth Center</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 text-center shadow-soft border border-cream-200">
+          <div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-sage-100 flex items-center justify-center">
+            <svg class="w-6 h-6 text-sage-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+          </div>
+          <p class="text-stone-500 text-sm font-medium mb-1">Ages</p>
+          <p class="text-primary-900 font-display text-xl font-semibold">6th - 12th Grade</p>
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+        <a href="/visit" class="btn btn-warm">
+          Come Check Us Out
+        </a>
+        <a href="/contact" class="btn btn-secondary">
+          Have Questions?
+        </a>
+      </div>
+    </Container>
+  </section>
+
+  <!-- What We Do Section -->
+  <section class="py-20 lg:py-28 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-cream-50 via-white to-primary-50/30"></div>
+
+    <Container class="relative">
+      <div class="text-center mb-16">
+        <div class="inline-flex items-center gap-3 mb-4">
+          <span class="w-8 h-[1px] bg-terra-400"></span>
+          <span class="text-terra-600 text-sm font-medium tracking-widest uppercase">What We Do</span>
+          <span class="w-8 h-[1px] bg-terra-400"></span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-display font-semibold text-primary-900 mb-4">
+          More Than Just Meetings
+        </h2>
+        <p class="text-stone-600 text-lg max-w-2xl mx-auto">
+          Our youth group is all about creating a space where teenagers can be themselves, ask questions, and grow in their faith together
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {activities.map((activity) => (
+          <div class="group bg-white rounded-2xl overflow-hidden shadow-soft hover:shadow-card transition-all duration-300 border border-cream-200">
+            <!-- Colored header -->
+            <div class={`h-20 bg-gradient-to-br ${activity.color} relative overflow-hidden flex items-center justify-center`}>
+              <svg class="w-10 h-10 text-white/80 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d={activity.icon} />
+              </svg>
+            </div>
+
+            <div class="p-6">
+              <h3 class="font-display text-xl font-semibold text-primary-900 mb-1">
+                {activity.title}
+              </h3>
+              <p class="text-terra-600 text-sm font-medium mb-3">
+                {activity.subtitle}
+              </p>
+              <p class="text-stone-600 text-sm leading-relaxed">
+                {activity.description}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- Image break -->
+  <section class="relative h-64 md:h-80 overflow-hidden">
+    <img
+      src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1920&q=80"
+      alt="Youth group gathering together"
+      class="w-full h-full object-cover"
+      loading="lazy"
+    />
+    <div class="absolute inset-0 bg-primary-950/40"></div>
+  </section>
+
+  <!-- Wednesday Night Schedule -->
+  <section class="py-20 lg:py-28 bg-stone-100 relative overflow-hidden">
+    <!-- Texture -->
+    <div class="absolute inset-0 opacity-[0.02]" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E&quot;);"></div>
+
+    <Container class="relative">
+      <div class="text-center mb-16">
+        <div class="inline-flex items-center gap-3 mb-4">
+          <span class="w-8 h-[1px] bg-terra-400"></span>
+          <span class="text-terra-600 text-sm font-medium tracking-widest uppercase">The Schedule</span>
+          <span class="w-8 h-[1px] bg-terra-400"></span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-display font-semibold text-primary-900 mb-4">
+          Typical Wednesday Night
+        </h2>
+        <p class="text-stone-600 text-lg max-w-2xl mx-auto">
+          Here's what to expect when you join us
+        </p>
+      </div>
+
+      <div class="max-w-3xl mx-auto">
+        <div class="relative">
+          <!-- Vertical line -->
+          <div class="absolute left-8 md:left-12 top-8 bottom-8 w-[2px] bg-primary-200"></div>
+
+          {schedule.map((item, index) => (
+            <div class="relative flex gap-6 md:gap-8 mb-8 last:mb-0">
+              <!-- Number circle -->
+              <div class="relative z-10 w-16 h-16 md:w-24 md:h-24 rounded-full bg-primary-900 flex flex-col items-center justify-center shrink-0 shadow-lg">
+                <span class="text-terra-400 text-xs font-medium">{index + 1}</span>
+                <span class="text-white font-display font-bold text-sm md:text-base">{item.time.split(' ')[0]}</span>
+              </div>
+
+              <!-- Content card -->
+              <div class="flex-1 bg-white rounded-xl p-6 shadow-soft border border-cream-200">
+                <h3 class="font-display text-xl font-semibold text-primary-900 mb-2">
+                  {item.title}
+                </h3>
+                <p class="text-terra-600 text-sm font-medium mb-2">{item.time}</p>
+                <p class="text-stone-600 leading-relaxed">
+                  {item.description}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Small Groups Section -->
+  <section class="py-20 lg:py-28 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-cream-50 to-white"></div>
+
+    <Container class="relative">
+      <div class="text-center mb-16">
+        <div class="inline-flex items-center gap-3 mb-4">
+          <span class="w-8 h-[1px] bg-terra-400"></span>
+          <span class="text-terra-600 text-sm font-medium tracking-widest uppercase">Small Groups</span>
+          <span class="w-8 h-[1px] bg-terra-400"></span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-display font-semibold text-primary-900 mb-4">
+          Find Your Crew
+        </h2>
+        <p class="text-stone-600 text-lg max-w-2xl mx-auto">
+          Our small groups provide a safe space for deeper relationships and honest conversations about faith and life
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {smallGroups.map((group) => (
+          <div class="group bg-white rounded-2xl p-6 shadow-soft border border-cream-200 hover:shadow-card transition-all duration-300 text-center">
+            <!-- Avatar -->
+            <div class={`w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br ${group.color} flex items-center justify-center shadow-card group-hover:scale-105 transition-transform`}>
+              <span class="text-white font-display text-2xl font-bold">{group.initials}</span>
+            </div>
+
+            <h3 class="font-display text-lg font-semibold text-primary-900 mb-1">
+              {group.name}
+            </h3>
+            <p class="text-terra-600 text-sm font-medium mb-3">
+              Led by {group.leader}
+            </p>
+            <p class="text-stone-600 text-sm leading-relaxed">
+              {group.description}
+            </p>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- Upcoming Events Section -->
+  <section class="py-20 bg-primary-950 text-white relative overflow-hidden">
+    <!-- Texture overlay -->
+    <div class="absolute inset-0 opacity-[0.03]" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E&quot;);"></div>
+
+    <Container class="relative">
+      <div class="text-center mb-16">
+        <div class="inline-flex items-center gap-3 mb-4">
+          <span class="w-8 h-[1px] bg-golden-400"></span>
+          <span class="text-golden-400 text-sm font-medium tracking-widest uppercase">Coming Up</span>
+          <span class="w-8 h-[1px] bg-golden-400"></span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-display font-semibold text-white mb-4">
+          Upcoming Events
+        </h2>
+        <p class="text-primary-200 text-lg max-w-2xl mx-auto">
+          Check out what we have coming up! There's always something exciting happening in youth group.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        {upcomingEvents.map((event) => (
+          <div class="bg-primary-900/50 backdrop-blur-sm rounded-2xl p-6 border border-primary-700/50 hover:bg-primary-900/70 transition-colors">
+            <div class="flex items-start gap-4 mb-4">
+              <div class="w-14 h-14 rounded-xl bg-terra-500 flex flex-col items-center justify-center shrink-0">
+                <span class="text-white text-xs font-medium uppercase">{event.date.split(' ')[0]}</span>
+                <span class="text-white font-display font-bold">{event.date.split(' ')[1].replace(',', '')}</span>
+              </div>
+              <div>
+                <h3 class="font-display text-xl font-semibold text-white">
+                  {event.title}
+                </h3>
+                <p class="text-terra-400 text-sm">{event.location}</p>
+              </div>
+            </div>
+            <p class="text-primary-200 leading-relaxed">
+              {event.description}
+            </p>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- Meet Our Team Section -->
+  <section class="py-20 lg:py-28 bg-cream-100 relative overflow-hidden">
+    <Container class="relative">
+      <div class="text-center mb-16">
+        <div class="inline-flex items-center gap-3 mb-4">
+          <span class="w-8 h-[1px] bg-terra-400"></span>
+          <span class="text-terra-600 text-sm font-medium tracking-widest uppercase">Our Team</span>
+          <span class="w-8 h-[1px] bg-terra-400"></span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-display font-semibold text-primary-900 mb-4">
+          Meet Our Team
+        </h2>
+        <p class="text-stone-600 text-lg max-w-2xl mx-auto">
+          Our youth ministry team is passionate about walking alongside teenagers in their faith journey
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+        {team.map((member) => (
+          <div class="group text-center">
+            <!-- Avatar -->
+            <div class="relative mx-auto mb-6 w-32 h-32">
+              <div class={`w-full h-full rounded-2xl bg-gradient-to-br ${member.color} flex items-center justify-center shadow-card group-hover:shadow-elevated transition-shadow duration-300 group-hover:scale-105 transform transition-transform`}>
+                <span class="text-white font-display text-4xl font-bold">{member.initials}</span>
+              </div>
+            </div>
+
+            <h3 class="font-display text-xl font-semibold text-primary-900 mb-1">
+              {member.name}
+            </h3>
+            <span class="inline-block px-3 py-1 bg-terra-100 text-terra-700 rounded-full text-sm font-medium mb-4">
+              {member.role}
+            </span>
+            <p class="text-stone-600 text-sm leading-relaxed">
+              {member.description}
+            </p>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="relative py-24 overflow-hidden">
+    <div class="absolute inset-0">
+      <img
+        src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=1920&q=80"
+        alt=""
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-primary-950/90"></div>
+    </div>
+
+    <!-- Texture overlay -->
+    <div class="absolute inset-0 opacity-[0.03]" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E&quot;);"></div>
+
+    <Container class="relative z-10">
+      <div class="max-w-3xl mx-auto text-center">
+        <div class="inline-flex items-center gap-3 mb-6">
+          <span class="w-8 h-[1px] bg-golden-400"></span>
+          <span class="text-golden-400 text-sm font-medium tracking-widest uppercase">Join Us</span>
+          <span class="w-8 h-[1px] bg-golden-400"></span>
+        </div>
+
+        <h2 class="text-4xl md:text-5xl font-display font-semibold text-white mb-6">
+          Come As You Are
+        </h2>
+
+        <p class="text-primary-200 text-lg mb-10 max-w-2xl mx-auto">
+          Youth group is a place where you can be yourself, ask tough questions, and discover what
+          it means to follow Jesus. We'd love to meet you this Wednesday!
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/visit" class="btn btn-warm">
+            Come Check Us Out
+          </a>
+          <Button href="/contact" variant="outline" class="!bg-white/10 !text-white border-white/30 hover:!bg-white/20">
+            Contact Us
+          </Button>
+        </div>
+      </div>
+    </Container>
+  </section>
+</PageLayout>
